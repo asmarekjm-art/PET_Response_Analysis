@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="wczytywanie danych">
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="wczytywanie danych, podstawy czysczenia">
+      <change afterPath="$PROJECT_DIR$/src/classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cleaner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/analyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classifieer.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,13 +103,22 @@
       <option name="project" value="LOCAL" />
       <updated>1780832842985</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="wczytywanie danych, podstawy czysczenia">
+      <option name="closed" value="true" />
+      <created>1780833015398</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1780833015398</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tworzenie podstaw do projektu" />
     <MESSAGE value="podstawy projektu" />
     <MESSAGE value="wczytywanie danych" />
-    <option name="LAST_COMMIT_MESSAGE" value="wczytywanie danych" />
+    <MESSAGE value="wczytywanie danych, podstawy czysczenia" />
+    <option name="LAST_COMMIT_MESSAGE" value="wczytywanie danych, podstawy czysczenia" />
   </component>
 </project>
