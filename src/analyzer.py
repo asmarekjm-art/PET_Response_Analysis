@@ -21,3 +21,11 @@ def response_statistics(df):
     stats = df["response_class"].value_counts()
 
     return stats
+
+def treatment_statistics(df):
+
+    stats = df.groupby(
+        ["RODZAJ LECZENIA", "response_class"]
+    ).size()
+
+    return stats

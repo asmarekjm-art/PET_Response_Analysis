@@ -1,9 +1,13 @@
 from config import SOURCE_FILE
 from src.loader import load_data
-from src.cleaner import clean_data
+from src.cleaner import (
+    clean_data,
+    normalize_treatment
+)
 from src.analyzer import (
     analyze_responses,
-    response_statistics
+    response_statistics,
+    treatment_statistics
 )
 
 def main():
@@ -16,9 +20,14 @@ def main():
     print(data.shape)
 
     clean = clean_data(data)
+    clean = normalize_treatment(clean)
 
     analyzed = analyze_responses(clean)
     stats = response_statistics(analyzed)
+    treatment_stats = treatment_statistics(analyzed)
+
+    print("\n=== SKUTECZNOŚĆ LECZENIA ===")
+    print(treatment_stats)
 
     print("\n=== PODSUMOWANIE HUBA ===")
 
