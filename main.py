@@ -1,8 +1,10 @@
 from config import SOURCE_FILE
 from src.loader import load_data
 from src.cleaner import clean_data
-from src.analyzer import analyze_responses
-
+from src.analyzer import (
+    analyze_responses,
+    response_statistics
+)
 
 def main():
 
@@ -16,6 +18,13 @@ def main():
     clean = clean_data(data)
 
     analyzed = analyze_responses(clean)
+    stats = response_statistics(analyzed)
+
+    print("\n=== PODSUMOWANIE HUBA ===")
+
+    print(f"Liczba pacjentów: {len(analyzed)}")
+
+    print(stats)
 
     print("\nPo czyszczeniu:")
     print(clean.shape)

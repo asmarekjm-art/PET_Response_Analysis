@@ -14,3 +14,10 @@ def analyze_responses(df):
     df["response_class"] = responses
 
     return df
+
+
+def response_statistics(df):
+
+    stats = df["response_class"].value_counts()
+
+    return stats
