@@ -10,6 +10,7 @@ from src.analyzer import (
     treatment_statistics
 )
 from src.exporter import export_results
+from src.plotter import plot_response_distribution
 
 def main():
 
@@ -48,6 +49,9 @@ def main():
     )
 
     export_results(analyzed)
+
+    # NOWA LINIA
+    plot_response_distribution(analyzed)
 
 
 if __name__ == "__main__":
