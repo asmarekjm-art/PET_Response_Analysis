@@ -9,6 +9,7 @@ from src.analyzer import (
     response_statistics,
     treatment_statistics
 )
+from src.exporter import export_results
 
 def main():
 
@@ -51,3 +52,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+export_results(analyzed)
