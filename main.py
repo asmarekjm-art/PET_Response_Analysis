@@ -27,7 +27,8 @@ def deauville(response):
     }
 
     return mapping.get(str(response).strip(), None)
-
+def detect_response(opis):
+    return "CR"
 
 # =========================
 # WCZYTANIE PLIKÓW
@@ -53,9 +54,13 @@ for file in folder.glob("*.xlsx"):
 
 master_df = pd.concat(all_data, ignore_index=True)
 
-# =========================
-# LUGANO I DEAUVILLE
-# =========================
+#LUGANO
+# Automatyczna ocena odpowiedzi z opisu PET
+
+master_df["Ocena odpowiedzi"] = (
+    master_df["Opis"]
+    .apply(detect_response)
+)
 
 master_df["Lugano"] = (
     master_df["Ocena odpowiedzi"]
@@ -66,7 +71,43 @@ master_df["Deauville"] = (
     master_df["Ocena odpowiedzi"]
     .apply(deauville)
 )
+def detect_response(opis):
 
+    opis = str(opis).lower()
+
+    if any(x in opis for x in [
+        "brak aktywnej metabolicznie choroby",
+        "brak aktywnego procesu chłoniakowego",
+        "brak aktywnych zmian",
+        "całkowita remisja"
+    ]):
+        return "CR"
+
+    if any(x in opis for x in [
+        "częściowa regresja",
+        "znaczna regresja",
+        "bardzo dobra odpowiedź",
+        "dobra odpowiedź",
+        "regresja zmian"
+    ]):
+        return "PR"
+
+    if any(x in opis for x in [
+        "stabilizacja",
+        "bez istotnej zmiany",
+        "utrzymują się zmiany"
+    ]):
+        return "SD"
+
+    if any(x in opis for x in [
+        "progresja",
+        "wznowa",
+        "nowe zmiany",
+        "nawrót"
+    ]):
+        return "PD"
+
+    return "Nieokreślone"
 # =========================
 # STATYSTYKI
 # =========================
@@ -112,6 +153,19 @@ summary = (
 print("\n===== CHARAKTERYSTYKA =====")
 print(summary)
 
+patient_status = (
+    master_df
+    .sort_values("Data badania")
+    .groupby("Pacjent")
+    .tail(1)
+)
+
+patient_status = patient_status[
+    ["Pacjent", "Ocena odpowiedzi", "Lugano", "Deauville"]
+]
+
+print("\n===== OSTATNI WYNIK PACJENTA =====")
+print(patient_status)
 # =========================
 # ZAPIS
 # =========================
@@ -128,5 +182,10 @@ with pd.ExcelWriter("Wyniki_HUBA.xlsx") as writer:
         writer,
         sheet_name="Pacjenci"
     )
+patient_status.to_excel(
+    writer,
+    sheet_name="Ostatni_wynik",
+    index=False
+)
 
 print("\nZapisano: Wyniki_HUBA.xlsx")
