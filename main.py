@@ -1,6 +1,6 @@
 from config import SOURCE_FILE
 from src.loader import load_data
-
+from src.cleaner import clean_data
 
 def main():
 
@@ -8,12 +8,16 @@ def main():
 
     data = load_data(SOURCE_FILE)
 
-    print("\nWymiary danych:")
+    print("\nPrzed czyszczeniem:")
     print(data.shape)
 
-    print("\nKolumny:")
-    print(data.columns.tolist())
+    clean = clean_data(data)
 
+    print("\nPo czyszczeniu:")
+    print(clean.shape)
+
+    print("\nKolumny po czyszczeniu:")
+    print(clean.columns.tolist())
 
 if __name__ == "__main__":
     main()

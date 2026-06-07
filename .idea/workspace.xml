@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="podstawy projektu">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/loader.py" afterDir="false" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="wczytywanie danych">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cleaner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cleaner.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,12 +92,21 @@
       <option name="project" value="LOCAL" />
       <updated>1780832055337</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="wczytywanie danych">
+      <option name="closed" value="true" />
+      <created>1780832842984</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1780832842985</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tworzenie podstaw do projektu" />
     <MESSAGE value="podstawy projektu" />
-    <option name="LAST_COMMIT_MESSAGE" value="podstawy projektu" />
+    <MESSAGE value="wczytywanie danych" />
+    <option name="LAST_COMMIT_MESSAGE" value="wczytywanie danych" />
   </component>
 </project>
