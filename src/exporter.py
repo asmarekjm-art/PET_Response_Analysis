@@ -10,5 +10,7 @@ def export_results(df):
         index=False,
         encoding="utf-8-sig"
     )
+    summary = df["response_class"].value_counts()
+    summary.to_csv("Results/tables/response_summary.csv")
 
     print("\nWyniki zapisane.")
