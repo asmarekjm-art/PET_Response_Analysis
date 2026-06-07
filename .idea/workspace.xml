@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="wczypoprawa wczytywania danych, z jednego pliku na kilka osobych i bardziej szczegolowych dla kazdego pacjenta" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="dopisanie skali deavill">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,7 +116,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780853886207</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="dopisanie skali deavill">
+      <option name="closed" value="true" />
+      <created>1780854651084</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1780854651085</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -122,6 +133,7 @@
     <MESSAGE value="wczytywanie danych" />
     <MESSAGE value="wczytywanie danych, podstawy czysczenia" />
     <MESSAGE value="wczypoprawa wczytywania danych, z jednego pliku na kilka osobych i bardziej szczegolowych dla kazdego pacjenta" />
-    <option name="LAST_COMMIT_MESSAGE" value="wczypoprawa wczytywania danych, z jednego pliku na kilka osobych i bardziej szczegolowych dla kazdego pacjenta" />
+    <MESSAGE value="dopisanie skali deavill" />
+    <option name="LAST_COMMIT_MESSAGE" value="dopisanie skali deavill" />
   </component>
 </project>
