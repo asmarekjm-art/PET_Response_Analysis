@@ -1,0 +1,57 @@
+﻿LP,IMIE,NAZWISKO,płeć,PESEL,wiek,Wiek w chwili rozpoczęcia leczenia,CHOROBA,RODZAJ LECZENIA,Przed rozpoczęciem /ocena zaawansowania klinicznego,W trakcie leczenia,response_class
+1.0,Barbara,Kwarcińska,kobieta,73091907347,1973-09-19,50.0,DLBCL Chłoniak Nieziarniczy,RCHOP,2023-01-17,11.05.2023/po 3 cyklach RCHOP /częsciowa odpowiedź na leczenie,INNE
+2.0,Bolesław ,Kowalczyk,mężczyzna,64080905213,1964-08-09,56.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2020-09-15,9.11.2021/ po 2 cyklach ABVD/ dobra odpowiedz,DOBRA
+3.0,Mateusz ,Janik,mężczyzna,00262603890,2000-06-26,22.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2022-04-24,13.06.2022/po 2 cyklach/ dobra odpowiedź,DOBRA
+4.0,Marcin,Medyński,mężczyzna,88030817977,1988-03-08,34.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2022-08-30,27.10.2022/ po 2 cyklach/dobra odpowiedz na leczenie,DOBRA
+5.0,Marzena ,Sodolewska,kobieta,75101612724,1975-10-16,45.0,Chłoniak Hodgkina ziarnica złośliwa,PBSCT,2020-08-31,5.11.2020/cześciowa regresja,INNE
+6.0,Justyna ,Gara,kobieta,02222703804,2002-02-27,20.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2022-09-26,1.12.2022/ po 2 cyklach/ częściowa odpowiedź,CZESCIOWA
+7.0,Elżbieta ,Galas,kobieta,34031404566,1934-03-14,88.0,DLBCL Chłoniak Nieziarniczy,IFRT,2022-12-06,16.02.2023/po 2 cyklach/częściowa odpowiedź,CZESCIOWA
+8.0,Anna ,Tokarczyk,kobieta,97070210363,1997-07-02,26.0,Chłoniak Hodgkina ziarnica złośliwa,BEACOPP/ABVD,2023-01-03,23.02.2023/po 2 cyklach BEACOOP/ dobra odpowiedź,DOBRA
+9.0,Eugeniusz,Rachwał,mężczyzna,55041410134,1955-04-14,67.0,Chłoniak MALT ,RCVP/IFRT,2022-06-13,03.11.2022/po 2 cyklach RCVP/ czesciowa odpowiedź,CZESCIOWA
+10.0,Michał,Trzosło,mężczyzna,04211306896,2004-01-13,19.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2023-01-26,8.05.2023/po 2 cyklach /częściowa odpowiedź,CZESCIOWA
+11.0,Andrzej ,Pietras,mężczyzna,47060505070,1947-06-05,74.0,Chłoniak z komórek płaszcza,RCHOP,2021-07-27,04.11.2021/po 3 cyklach RCHOP/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+12.0,Katarzyna ,Barczyk,kobieta,80120208160,1980-12-02,41.0,Chłoniak Hodgkina ziarnica złośliwa,BEACOPP/ABVD/IFRT,2021-09-20,15.11.20221/w trakcie leczenia/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+13.0,Agnieszka,Stankiewicz,kobieta,90032401506,1990-03-24,32.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD/IFRT,2022-06-06,23.08.2022/w trakcie leczenia ABVD/dobra odpowiedz,DOBRA
+14.0,Antoni,Kasprzyk,mężczyzna,53011317939,1953-01-13,67.0,DLBCL chłoniak nieziarniczy,RCHOP,2020-06-08,19.10.2020/po 4 cyklach/czesciowa odpowiedz na leczenie,CZESCIOWA
+15.0,Mateusz ,Król,mężczyzna,96072709211,1996-07-27,26.0,Chłoniak Hodgkina ziarnica złośliwa,IFRT,2022-09-29,20.03.2023/po zakonczeniu IFRT/dobra odpowiedź na leczenie,DOBRA
+16.0,Józef,Okła,mężczyzna,49031805132,1949-03-18,73.0,DLBCL Chłoniak nieziarniczy,RCHOP,2022-05-19,13.12.2022/po 4 cyklach RCHOP/dobra odpowiedz na leczenie,DOBRA
+17.0,Oleksandr,Zakrevskyi,mężczyzna,91040520492,1991-04-05,31.0,Chłoniak z komórek B,RCHOP/IFRT,2022-05-12,28.06.2022/ po 4 cyklach leczenia/ dobra odpowiedź,DOBRA
+18.0,Dorota ,Wróbel,kobieta,66091705404,1966-09-17,55.0,Chłoniak nieziarniczy grudkowy,CVP,2021-11-22,4.04.2022/po 3 cyklach leczenia/bardzo dobra odpowiedź na leczenie,BARDZO_DOBRA
+19.0,Elżbieta ,ściobłowska,kobieta,50080305368,1950-08-03,72.0,Obwodowy chłoniak z komórek T,CHOP,2022-04-28,14.07.2022/po 2 cyklach CHOP/bardzo dobra odpowiedź na leczenie,BARDZO_DOBRA
+20.0,Eweina,Strzyż,kobieta,86111008821,1986-11-10,36.0,Obwodowy chłoniak z komórek T,CHOEP,2022-11-08,14.02.2023/po 3 cyklach/czesciowa odpowiedz,CZESCIOWA
+21.0,Małgorzata ,stachera,kobieta,72022100325,1972-02-21,49.0,Chłoniak z komórek B,RCHOP,2021-05-13,26.07.2021/ po 3 cyklach/ bardzo dobra odpowedz na leczenie,BARDZO_DOBRA
+22.0,Roman,Słota,mężczyzna,59071412618,1959-07-14,63.0,Chłoniak z komórek płaszcza,RCHOP/RHAD,2022-04-14,22.08.2022/po 2 cyklach/dobra odpowiedz,DOBRA
+23.0,antoni,sajdak,mężczyzna,43080103814,1943-08-01,78.0,chłoniak z komorek płaszcza,RCHOP,2021-08-09,23.12.2021/po 3 cyklach leczenia/ dobra odpowiedź na leczenie,DOBRA
+24.0,Marek,Rzepka,mężczyzna,50061103895,1950-06-11,71.0,Chłoniak Hodgkina ziarnica złośliwa,BGD,2021-05-13,29.07.2021/po 2 cyklach/dobra odpowiedz na leczenie,DOBRA
+25.0,Karolina,Radwanska-zajac,kobieta,95072406081,1995-07-24,26.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2021-11-29,17.02.2022/po 2 cyklach/ progresja choroby,PROGRESJA
+26.0,RENATA,PIROWSKA,kobieta,72021216087,1972-02-12,49.0,CHŁONIAK NIEZIARNICZY ROZLANY,RDAEPOCH/MTX,2021-05-27,17.08.2021/PO 3 CYKLACH/DOBRA ODPOWIEDZ NA LECZENIE,DOBRA
+27.0,Dorota ,PIETRAS,kobieta,65041813004,1965-04-18,57.0,Chłoniak obwodowy i skóry z komórek T,CHOEP,2022-11-21,31.01.2023/po 3 cyklach/prograsja,INNE
+28.0,ryszard,paszko,mężczyzna,54070108074,1954-07-01,68.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2022-03-14,"6.07.2022/wczesna ocena odpowiedzi, po 2 cyklach/bardzo dobra odpowiedz na leczenie",BARDZO_DOBRA
+29.0,ewa,pańszczyk,kobieta,61061502485,1961-06-15,60.0,chłoniak z obwodowych komóek B,CHOP,2021-09-28,28.12.2021/po 3 cyklach CHOP/dobra odpowiedź,DOBRA
+30.0,Anna ,Paluch,kobieta,79072315628,1979-07-23,43.0,chłoniak nieziarniczy guzkowaty,CVP,2022-06-28,20.12.2022/po 4 cyklach /bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+31.0,Krzysztof ,osak,mężczyzna,72092805715,1972-09-28,50.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD/IFTR,2022-01-27,5.04.022/po 2 cyklach ABVD/czesciowa odpoweidz,CZESCIOWA
+32.0,halina,Lewińska,kobieta,53093012861,1953-09-30,69.0,Chłoniak guzkowy,CVP,2022-02-08,16.08.2022/po 4 cyklach CVP/dobra odpowiedz na leczenie,DOBRA
+33.0,roman,kurzeja,mężczyzna,62112302232,1962-11-23,60.0,agresywny chłoniak B komórkowy,RCHOP,2022-09-07,12.12.2022/po 3 cyklach RCHOP/dobra odpowiedz na leczenie,DOBRA
+34.0,ludwik,kozina,mężczyzna,73082515096,1973-08-25,48.0,Chłoniak ziarniczy,ABVD,2021-05-24,3.08.2021/po 2 cyklach ABVD/dobra odpowiedz na leczenie,DOBRA
+35.0,Grzegorz,Kosowski,mężczyzna,73121709419,1973-12-17,48.0,Chłoniak nieziarniczy guzkowy,CVP,2021-06-15,21.10.2021/po 3 cyklach/ dobra odpowiedz na leczenie,DOBRA
+36.0,Joanna,Klęp,kobieta,85081416162,1985-08-14,36.0,Chłoniak śódpiersia z obwodowych Komórek B,RCHOP,2021-04-19,21.06.2021/po 3 cyklach RCHOP/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+37.0,Izabela,Katyńska,kobieta,79051904182,1979-05-19,42.0,Chłoniak nieziarniczy,CHOP,2021-05-20,26.07.2021/po 3 cyklach/ czesciowa odpowiedz na leczenie,CZESCIOWA
+38.0,Krzysztof ,Jerzykowski,mężczyzna,66090905171,1966-09-09,55.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2021-12-16,1.03.2022/po2 cyklach ABVD/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+39.0,Sylwester,Jasnos,mężczyzna,70123003770,1970-12-30,52.0,DLBCL Chłoniak nieziarniczy,RCHOP/MTX,2022-10-04,13.02.2023/po 2 cyklach RCHOP i 2 cyklach MTX/czesciowa odpowiedz,CZESCIOWA
+40.0,Halina,Jasik,kobieta,56120903084,1956-12-09,66.0,Chłonika nieziarniczy z komórek T,RCHOP,2022-11-14,23.02.2023/po 3 cyklach RCHOP/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+41.0,Grzegorz,Jarecki,mężczyzna,97021006991,1997-02-10,25.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD/AVD/,2022-07-28,11.10.2022/po 2 cyklach ABVD/bardzo dobra odpowiedz na leczenie/,BARDZO_DOBRA
+42.0,Adam,Hazik,mężczyzna,96071805079,1996-07-18,27.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2023-03-13,06.06.2023/po 2 cyklach ABVD/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+43.0,Sylwia,Gmer-Repeta,kobieta,77090401345,1977-09-04,45.0,Chłoniak Hodgkina ziarnica złośliwa,BEACOPP,2022-09-06,7.11.2022/po 2 cyklach/czesciowa odpowiedź,CZESCIOWA
+44.0,Janusz,Front,mężczyzna,44110101778,1944-11-01,77.0,DLBCL Chłoniak Nieziarniczy,RCHOP,2021-06-14,28.09.2021/po 3 cyklach /dobra odpowiedz na leczenie,DOBRA
+45.0,Marta,Fiszbain,kobieta,60071503367,1960-07-15,61.0,Chłoniak niezairniczy,OCVP,2021-09-13,13.12.2021/po 3 cyklach /dobra odpowiedz na leczenie,DOBRA
+46.0,Matylda ,Firek,kobieta,00232205686,2000-03-22,21.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD/BEACOPP,2021-03-29,17.05.2021/po 2 cyklach aBVD/czesciowa odpowiedz na leczenia,CZESCIOWA
+47.0,Edward,Drapała,mężczyzna,36091200711,1936-09-12,85.0,Chłoniak nieziarniczy rozlany,CHOP,2021-05-24,7.09.2021/po 4 cyklach/dobra odpowiedz na leczenie,DOBRA
+48.0,Martyna,burda,kobieta,99010405183,1999-01-04,21.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2020-07-07,14.09.2020/po 2 cyklach/czesciowa odpowiedx na leczenie,CZESCIOWA
+49.0,Robert,Chojnowski,mężczyzna,65092604958,1965-09-26,55.0,Chłoniak T komórkowy,CHOEP,2020-03-24,1.06.2020/po 3 cyklach/dobra odpowiedź na leczenie,DOBRA
+50.0,Marek,Rzepka ,mężczyzna,50061103895,1950-06-11,71.0,Chłoniak Hodgkina ziarnica złośliwa,BGD,2021-05-13,29.07.2021/po 2 cyklach /dobra odpowiedź na leczenie,DOBRA
+51.0,Sebastiaon,Tomasik,mężczyzna,87072200017,1987-07-22,33.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2020-09-28,3.12.2020/po2 cyklach leczenie/dobra odpowedz na leczenie,INNE
+52.0,Jan,Tracz,mężczyzna,97052406519,1997-05-24,25.0,Chłoniak Hodgkina ziarnica złośliwa,BEACOPP,2022-02-07,29.0.2022/po 2 cyklach leczenia/dobra odpowiedz na leczenie,DOBRA
+53.0,Marta,Żmuda,kobieta,89012707505,1989-01-27,31.0,Chłoniak Hodgkina ziarnica złośliwa,ABVD,2020-05-14,27.07.2020/po 2 cyklach/dobra odpowiedz na leczenie,DOBRA
+54.0,Adam,Wosik,mężczyzna,53121410292,1953-12-14,68.0,Chłoniak z komórek płaszcza,RHAD,2021-01-05,25.05.2021/po 2 cyklach/dobra dopowedz na leczenie,INNE
+55.0,Anna ,Bąk,kobieta,70012501626,1970-01-25,51.0,Chłoniak Grudkowy,CVP,2021-11-23,17.05.2021/po 4 cyklach lecznia/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA
+56.0,Robert,CHojnowski,mężczyzna,65092604958,1965-09-26,55.0,Chłonika nieziarniczy z komórek T,CHOEP,2020-04-24,1.06.2020/po 3 cyklacch/bardzo dobra odpowiedz na leczenie,BARDZO_DOBRA

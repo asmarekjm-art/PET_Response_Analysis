@@ -31,7 +31,6 @@ def main():
     print(treatment_stats)
 
     print("\n=== PODSUMOWANIE HUBA ===")
-
     print(f"Liczba pacjentów: {len(analyzed)}")
 
     print(stats)
@@ -43,13 +42,13 @@ def main():
     print(clean.columns.tolist())
 
     print("\nKlasy odpowiedzi:")
-
     print(
         analyzed["response_class"]
         .value_counts()
     )
 
+    export_results(analyzed)
+
 
 if __name__ == "__main__":
     main()
-export_results(analyzed)
