@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="dodanie suv max dla pierwszego i ostatniego badania">
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Dodano analizę pacjentów i SUVmax w aplikacji Streamlit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780858373672</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Dodano analizę pacjentów i SUVmax w aplikacji Streamlit">
+      <option name="closed" value="true" />
+      <created>1780942408718</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780942408719</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -144,6 +152,7 @@
     <MESSAGE value="wczypoprawa wczytywania danych, z jednego pliku na kilka osobych i bardziej szczegolowych dla kazdego pacjenta" />
     <MESSAGE value="dopisanie skali deavill" />
     <MESSAGE value="dodanie suv max dla pierwszego i ostatniego badania" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodanie suv max dla pierwszego i ostatniego badania" />
+    <MESSAGE value="Dodano analizę pacjentów i SUVmax w aplikacji Streamlit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dodano analizę pacjentów i SUVmax w aplikacji Streamlit" />
   </component>
 </project>

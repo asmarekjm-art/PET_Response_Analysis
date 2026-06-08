@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
+# =====================================
+# KONFIGURACJA
+# =====================================
+
 st.set_page_config(
     page_title="PET Response Analysis",
     page_icon="☢️",
@@ -10,6 +14,10 @@ st.set_page_config(
 
 st.title("☢️ PET Response Analysis")
 st.subheader("Analysis of Treatment Response in Hodgkin Lymphoma Patients")
+
+# =====================================
+# WCZYTYWANIE PLIKÓW
+# =====================================
 
 folder = Path("pacjenci")
 
@@ -32,9 +40,13 @@ for file in folder.glob("*.xlsx"):
     df["Pacjent"] = name.replace("_", " ")
 
     all_data.append(df)
+
 master_df = pd.concat(all_data, ignore_index=True)
 
-# SUVmax
+# =====================================
+# CZYSZCZENIE DANYCH
+# =====================================
+
 master_df["SUVmax"] = (
     master_df["SUVmax"]
     .astype(str)
@@ -46,16 +58,50 @@ master_df["SUVmax"] = pd.to_numeric(
     errors="coerce"
 )
 
-# Daty
 master_df["Data badania"] = pd.to_datetime(
     master_df["Data badania"],
     dayfirst=True,
     errors="coerce"
 )
 
-# =====================
+# =====================================
+# ANALIZA SUVMAX DLA CAŁEJ GRUPY
+# =====================================
+
+suv_summary = []
+
+for pac in master_df["Pacjent"].unique():
+
+    temp = (
+        master_df[
+            master_df["Pacjent"] == pac
+        ]
+        .sort_values("Data badania")
+    )
+
+    suv = temp["SUVmax"].dropna()
+
+    if len(suv) >= 2:
+
+        zmiana = (
+            (suv.iloc[-1] - suv.iloc[0])
+            / suv.iloc[0]
+        ) * 100
+
+        suv_summary.append(
+            {
+                "Pacjent": pac,
+                "SUVmax_pierwszy": round(suv.iloc[0], 2),
+                "SUVmax_ostatni": round(suv.iloc[-1], 2),
+                "Zmiana_%": round(zmiana, 2)
+            }
+        )
+
+suv_summary = pd.DataFrame(suv_summary)
+
+# =====================================
 # DASHBOARD GŁÓWNY
-# =====================
+# =====================================
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -92,9 +138,23 @@ with col4:
 
 st.divider()
 
-# =====================
+# =====================================
+# RANKING PACJENTÓW
+# =====================================
+
+st.subheader("🏆 Skuteczność leczenia")
+
+st.dataframe(
+    suv_summary.sort_values(
+        "Zmiana_%",
+        ascending=True
+    ),
+    use_container_width=True
+)
+
+# =====================================
 # WYBÓR PACJENTA
-# =====================
+# =====================================
 
 pacjent = st.selectbox(
     "Wybierz pacjenta",
@@ -108,9 +168,9 @@ dane = (
     .sort_values("Data badania")
 )
 
-# =====================
+# =====================================
 # KARTA PACJENTA
-# =====================
+# =====================================
 
 st.subheader(f"👤 {pacjent}")
 
@@ -122,10 +182,9 @@ with col1:
         len(dane)
     )
 
+suv = dane["SUVmax"].dropna()
+
 with col2:
-
-    suv = dane["SUVmax"].dropna()
-
     if len(suv):
         st.metric(
             "SUVmax początkowy",
@@ -133,18 +192,15 @@ with col2:
         )
 
 with col3:
-
-    suv = dane["SUVmax"].dropna()
-
     if len(suv):
         st.metric(
             "SUVmax końcowy",
             round(suv.iloc[-1], 2)
         )
 
-# =====================
-# ANALIZA SUVMAX
-# =====================
+# =====================================
+# ZMIANA SUVMAX
+# =====================================
 
 if len(suv) >= 2:
 
@@ -158,23 +214,89 @@ if len(suv) >= 2:
         round(zmiana, 1)
     )
 
-# =====================
-# WYKRES
-# =====================
+    if zmiana <= -70:
+        st.success(
+            "Bardzo dobra odpowiedź na leczenie"
+        )
 
-st.subheader("📈 Trend SUVmax")
+    elif zmiana <= -30:
+        st.info(
+            "Częściowa odpowiedź na leczenie"
+        )
+
+    elif zmiana <= 0:
+        st.warning(
+            "Niewielka odpowiedź na leczenie"
+        )
+
+    else:
+        st.error(
+            "Podejrzenie progresji choroby"
+        )
+
+# =====================================
+# WYKRES SUVMAX
+# =====================================
+
+st.subheader("📈 SUVmax w czasie")
 
 wykres = dane.dropna(subset=["SUVmax"])
 
-if len(wykres):
+if len(wykres) > 0:
 
     st.line_chart(
         wykres.set_index("Nr PET")["SUVmax"]
     )
 
-# =====================
-# TABELA
-# =====================
+st.subheader("📄 Automatyczny raport")
+
+if len(suv) >= 2:
+
+    pierwsza_data = dane["Data badania"].min()
+    ostatnia_data = dane["Data badania"].max()
+
+    if zmiana <= -70:
+        ocena = "Bardzo dobra odpowiedź metaboliczna"
+
+    elif zmiana <= -30:
+        ocena = "Częściowa odpowiedź metaboliczna"
+
+    elif zmiana <= 0:
+        ocena = "Niewielka odpowiedź na leczenie"
+
+    else:
+        ocena = "Progresja choroby"
+
+    raport = f"""
+Pacjent: {pacjent}
+
+Liczba badań PET: {len(dane)}
+
+SUVmax:
+{suv.iloc[0]:.1f} → {suv.iloc[-1]:.1f}
+
+Zmiana SUVmax:
+{zmiana:.1f}%
+
+Interpretacja:
+{ocena}
+
+Pierwsze badanie:
+{pierwsza_data.strftime('%d.%m.%Y')}
+
+Ostatnie badanie:
+{ostatnia_data.strftime('%d.%m.%Y')}
+"""
+
+    st.text_area(
+        "Raport",
+        raport,
+        height=250
+    )
+
+# =====================================
+# HISTORIA BADAŃ
+# =====================================
 
 st.subheader("📋 Historia badań PET")
 
