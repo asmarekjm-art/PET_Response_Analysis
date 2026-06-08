@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="dopisanie skali deavill">
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="dodanie suv max dla pierwszego i ostatniego badania">
+      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.app.executor": "Run",
     "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -124,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780854651085</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="dodanie suv max dla pierwszego i ostatniego badania">
+      <option name="closed" value="true" />
+      <created>1780858373671</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1780858373672</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -134,6 +143,7 @@
     <MESSAGE value="wczytywanie danych, podstawy czysczenia" />
     <MESSAGE value="wczypoprawa wczytywania danych, z jednego pliku na kilka osobych i bardziej szczegolowych dla kazdego pacjenta" />
     <MESSAGE value="dopisanie skali deavill" />
-    <option name="LAST_COMMIT_MESSAGE" value="dopisanie skali deavill" />
+    <MESSAGE value="dodanie suv max dla pierwszego i ostatniego badania" />
+    <option name="LAST_COMMIT_MESSAGE" value="dodanie suv max dla pierwszego i ostatniego badania" />
   </component>
 </project>
