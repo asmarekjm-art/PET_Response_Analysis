@@ -239,22 +239,53 @@ for plik in folder.glob("*.docx"):
         # =========================
         # DODANIE WIERSZA
         # =========================
+        summary = ""
+
+        if odpowiedz == "Baseline":
+            summary = (
+                "Aktywna metabolicznie choroba przed rozpoczęciem leczenia. "
+                "Badanie wyjściowe stanowiące punkt odniesienia."
+            )
+
+        elif odpowiedz == "CR":
+            summary = (
+                f"Nie stwierdza się aktywnej metabolicznie choroby. "
+                f"Klasyfikacja Lugano: {lugano}. "
+                f"Deauville: {deauville}."
+            )
+
+        elif odpowiedz == "PR":
+            summary = (
+                f"Częściowa odpowiedź metaboliczna na leczenie. "
+                f"Klasyfikacja Lugano: {lugano}. "
+                f"Deauville: {deauville}."
+            )
+
+        elif odpowiedz == "PD":
+            summary = (
+                f"Progresja choroby. "
+                f"Klasyfikacja Lugano: {lugano}. "
+                f"Deauville: {deauville}."
+            )
+
+        else:
+            summary = (
+                f"Stabilizacja choroby. "
+                f"Klasyfikacja Lugano: {lugano}. "
+                f"Deauville: {deauville}."
+            )
 
         badania.append({
 
             "Data badania": data,
-            "Nr PET": f"PET {i + 1}",
+            "Nr badania": i + 1,
             "Etap leczenia": problem,
             "Linia leczenia": "",
             "Opis": wynik_pet,
             "SUVmax": suvmax,
-            "Lokalizacja zmian": "",
             "Ocena odpowiedzi": odpowiedz,
-            "Opis odpowiedzi": opis_odpowiedzi,
-            "Lugano": lugano,
             "Deauville": deauville,
-            "Wnioski": wnioski
-
+            "Wnioski": summary
         })
 
     # =========================

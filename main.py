@@ -10,11 +10,13 @@ def detect_response(opis):
     opis = str(opis).lower()
 
     if any(x in opis for x in [
-        "brak aktywnej metabolicznie choroby",
-        "brak aktywnych zmian",
-        "brak aktywnego procesu chłoniakowego",
-        "całkowita remisja",
-        "brak cech aktywnego procesu"
+        "pełna odpowiedź metaboliczna",
+        "całkowita odpowiedź metaboliczna",
+        "complete response",
+        "remisja metaboliczna",
+        "brak patologicznego wychwytu fdg",
+        "brak ognisk patologicznego wychwytu fdg",
+        "nie uwidoczniono aktywnej choroby",
     ]):
         return "CR"
 
@@ -68,6 +70,27 @@ def deauville(response):
 
     return mapping.get(response, None)
 
+import re
+
+def detect_deauville(opis):
+
+    opis = str(opis).lower()
+
+    patterns = [
+        r"deauville\s*1",
+        r"deauville\s*2",
+        r"deauville\s*3",
+        r"deauville\s*4",
+        r"deauville\s*5"
+    ]
+
+    for pattern in patterns:
+        match = re.search(pattern, opis)
+
+        if match:
+            return int(match.group()[-1])
+
+    return None
 
 def generate_summary(response, deauville_score):
 
@@ -98,7 +121,10 @@ def generate_summary(response, deauville_score):
             f"Klasyfikacja Lugano: Progressive Disease (PD), Deauville {deauville_score}."
         )
 
-    return "Brak możliwości automatycznej oceny odpowiedzi."
+    return (
+        "Nie udało się jednoznacznie określić odpowiedzi na leczenie "
+        "na podstawie dostępnego opisu PET."
+    )
 
 
 # =========================
@@ -180,8 +206,16 @@ master_df["Lugano"] = (
 )
 
 master_df["Deauville"] = (
-    master_df["Ocena odpowiedzi"]
-    .apply(deauville)
+    master_df["Opis"]
+    .apply(detect_deauville)
+)
+
+master_df["Deauville"] = master_df.apply(
+    lambda row:
+        row["Deauville"]
+        if pd.notna(row["Deauville"])
+        else deauville(row["Ocena odpowiedzi"]),
+    axis=1
 )
 
 master_df["Wnioski"] = master_df.apply(
@@ -267,6 +301,7 @@ badania_export = master_df[
         "Nr badania",
         "Etap leczenia",
         "Linia leczenia",
+        "Linia leczenia",
         "SUVmax",
         "Deauville",
         "Ocena odpowiedzi",
@@ -278,7 +313,7 @@ badania_export = master_df[
 # ZAPIS EXCEL
 # =========================
 
-with pd.ExcelWriter("Wyniki_HUBA.xlsx") as writer:
+with pd.ExcelWriter("Wyniki.xlsx") as writer:
 
     badania_export.to_excel(
         writer,

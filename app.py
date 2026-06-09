@@ -63,7 +63,11 @@ master_df["Data badania"] = pd.to_datetime(
     dayfirst=True,
     errors="coerce"
 )
-
+master_df["Data badania"] = pd.to_datetime(
+    master_df["Data badania"],
+    dayfirst=True,
+    errors="coerce"
+)
 # =====================================
 # ANALIZA SUVMAX DLA CAŁEJ GRUPY
 # =====================================
@@ -151,7 +155,6 @@ st.dataframe(
     ),
     width="stretch"
 )
-
 # =====================================
 # WYBÓR PACJENTA
 # =====================================
@@ -202,37 +205,19 @@ with col3:
 # ZMIANA SUVMAX
 # =====================================
 
-if len(suv) >= 2:
+ostatni = dane.iloc[-1]
 
-    zmiana = (
-        (suv.iloc[-1] - suv.iloc[0])
-        / suv.iloc[0]
-    ) * 100
+if ostatni["Ocena odpowiedzi"] == "CR":
+    st.success("Całkowita odpowiedź metaboliczna")
 
-    st.metric(
-        "Zmiana SUVmax (%)",
-        round(zmiana, 1)
-    )
+elif ostatni["Ocena odpowiedzi"] == "PR":
+    st.info("Częściowa odpowiedź metaboliczna")
 
-    if zmiana <= -70:
-        st.success(
-            "Bardzo dobra odpowiedź na leczenie"
-        )
+elif ostatni["Ocena odpowiedzi"] == "SD":
+    st.warning("Stabilizacja choroby")
 
-    elif zmiana <= -30:
-        st.info(
-            "Częściowa odpowiedź na leczenie"
-        )
-
-    elif zmiana <= 0:
-        st.warning(
-            "Niewielka odpowiedź na leczenie"
-        )
-
-    else:
-        st.error(
-            "Podejrzenie progresji choroby"
-        )
+elif ostatni["Ocena odpowiedzi"] == "PD":
+    st.error("Progresja choroby")
 
 # =====================================
 # WYKRES SUVMAX
@@ -243,29 +228,58 @@ st.subheader("📈 SUVmax w czasie")
 wykres = dane.dropna(subset=["SUVmax"])
 
 if len(wykres) > 0:
-
     st.line_chart(
-        wykres.set_index("Nr PET")["SUVmax"]
+        wykres.set_index("Nr badania")["SUVmax"]
     )
 
 st.subheader("📄 Automatyczny raport")
 
-if len(suv) >= 2:
+if len(suv) >= 1:
 
     pierwsza_data = dane["Data badania"].min()
     ostatnia_data = dane["Data badania"].max()
 
-    if zmiana <= -70:
-        ocena = "Bardzo dobra odpowiedź metaboliczna"
+    etapy = " → ".join(
+        dane["Etap leczenia"]
+        .dropna()
+        .astype(str)
+        .unique()
+    )
 
-    elif zmiana <= -30:
-        ocena = "Częściowa odpowiedź metaboliczna"
+    ostatni = (
+        dane
+        .sort_values("Data badania")
+        .iloc[-1]
+    )
 
-    elif zmiana <= 0:
-        ocena = "Niewielka odpowiedź na leczenie"
+    raport = f"""
+PACJENT
 
-    else:
-        ocena = "Progresja choroby"
+{pacjent}
+
+PRZEBIEG DIAGNOSTYKI
+
+Liczba badań PET/CT: {len(dane)}
+
+Okres obserwacji:
+{pierwsza_data:%d.%m.%Y} - {ostatnia_data:%d.%m.%Y}
+
+PRZEBIEG LECZENIA
+
+{etapy}
+
+OCENA ODPOWIEDZI
+
+{ostatni['Ocena odpowiedzi']}
+
+SKALA DEAUVILLE
+
+{ostatni['Deauville']}
+
+WNIOSEK
+
+{ostatni['Wnioski']}
+"""
 
     etapy = " → ".join(
         dane["Etap leczenia"]
@@ -309,31 +323,53 @@ if len(suv) >= 2:
 
     {ostatni['Ocena odpowiedzi']}
 
-    KLASYFIKACJA LUGANO
-
-    {ostatni['Lugano']}
-
     SKALA DEAUVILLE
 
     {ostatni['Deauville']}
 
-    INTERPRETACJA
+    WNIOSEK
 
-    {ocena}
+    {ostatni['Wnioski']}
 
-    WNIOSEK KOŃCOWY
-
-    {ostatni['Opis odpowiedzi']}
     """
 with st.expander("📄 Raport kliniczny", expanded=True):
     st.text(raport)
+
 # =====================================
 # HISTORIA BADAŃ
 # =====================================
 
 st.subheader("📋 Historia badań PET")
 
+if "Nr PET" in dane.columns and "Nr badania" not in dane.columns:
+    dane["Nr badania"] = (
+        dane["Nr PET"]
+        .astype(str)
+        .str.replace("PET ", "", regex=False)
+    )
+
+kolumny = [
+    col for col in [
+        "Data badania",
+        "Nr badania",
+        "Etap leczenia",
+        "Linia leczenia",
+        "SUVmax",
+        "Deauville",
+        "Ocena odpowiedzi",
+        "Wnioski"
+    ]
+    if col in dane.columns
+]
+dane_wyswietl = dane.copy()
+
+dane_wyswietl["Data badania"] = (
+    pd.to_datetime(
+        dane_wyswietl["Data badania"]
+    ).dt.strftime("%d.%m.%Y")
+)
+
 st.dataframe(
-    dane,
+    dane_wyswietl[kolumny],
     width="stretch"
 )

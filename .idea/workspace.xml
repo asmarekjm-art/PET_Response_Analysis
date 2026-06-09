@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="generowanie podsumowania w excel z .doxc">
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawiono raport">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -160,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780944751529</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="poprawiono raport">
+      <option name="closed" value="true" />
+      <created>1780991363484</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1780991363486</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -174,6 +182,7 @@
     <MESSAGE value="Dodano analizę pacjentów i SUVmax w aplikacji Streamlit" />
     <MESSAGE value="generowanie raportu" />
     <MESSAGE value="generowanie podsumowania w excel z .doxc" />
-    <option name="LAST_COMMIT_MESSAGE" value="generowanie podsumowania w excel z .doxc" />
+    <MESSAGE value="poprawiono raport" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawiono raport" />
   </component>
 </project>
