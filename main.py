@@ -69,6 +69,38 @@ def deauville(response):
     return mapping.get(response, None)
 
 
+def generate_summary(response, deauville_score):
+
+    if response == "CR":
+        return (
+            f"Nie stwierdza się aktywnej metabolicznie choroby. "
+            f"Uzyskano całkowitą odpowiedź metaboliczną na leczenie. "
+            f"Klasyfikacja Lugano: Complete Response (CR), Deauville {deauville_score}."
+        )
+
+    elif response == "PR":
+        return (
+            f"Widoczna regresja zmian w porównaniu z poprzednim badaniem. "
+            f"Nadal obecne są resztkowe ogniska aktywności metabolicznej. "
+            f"Klasyfikacja Lugano: Partial Response (PR), Deauville {deauville_score}."
+        )
+
+    elif response == "SD":
+        return (
+            f"Obraz pozostaje stabilny względem poprzedniego badania. "
+            f"Brak jednoznacznych cech regresji lub progresji. "
+            f"Klasyfikacja Lugano: Stable Disease (SD), Deauville {deauville_score}."
+        )
+
+    elif response == "PD":
+        return (
+            f"Stwierdza się progresję choroby z nowymi lub bardziej aktywnymi zmianami. "
+            f"Klasyfikacja Lugano: Progressive Disease (PD), Deauville {deauville_score}."
+        )
+
+    return "Brak możliwości automatycznej oceny odpowiedzi."
+
+
 # =========================
 # WCZYTANIE PLIKÓW
 # =========================
@@ -106,6 +138,8 @@ if not all_data:
 
 master_df = pd.concat(all_data, ignore_index=True)
 
+master_df["Nr badania"] = master_df["Nr PET"]
+
 # =========================
 # DATY
 # =========================
@@ -115,7 +149,10 @@ master_df["Data badania"] = pd.to_datetime(
     dayfirst=True,
     errors="coerce"
 )
-# Czyszczenie SUVmax
+
+# =========================
+# SUVmax
+# =========================
 
 master_df["SUVmax"] = (
     master_df["SUVmax"]
@@ -127,6 +164,7 @@ master_df["SUVmax"] = pd.to_numeric(
     master_df["SUVmax"],
     errors="coerce"
 )
+
 # =========================
 # OCENA ODPOWIEDZI
 # =========================
@@ -146,8 +184,16 @@ master_df["Deauville"] = (
     .apply(deauville)
 )
 
+master_df["Wnioski"] = master_df.apply(
+    lambda row: generate_summary(
+        row["Ocena odpowiedzi"],
+        row["Deauville"]
+    ),
+    axis=1
+)
+
 # =========================
-# PODSUMOWANIE
+# ANALIZY
 # =========================
 
 liczba_pacjentow = master_df["Pacjent"].nunique()
@@ -157,22 +203,11 @@ print("\n===== PODSUMOWANIE =====")
 print(f"Liczba pacjentów: {liczba_pacjentow}")
 print(f"Liczba badań PET: {liczba_pet}")
 
-# =========================
-# PET NA PACJENTA
-# =========================
-
 pet_per_patient = (
     master_df
     .groupby("Pacjent")["Nr PET"]
     .count()
 )
-
-print("\n===== PET NA PACJENTA =====")
-print(pet_per_patient)
-
-# =========================
-# CHARAKTERYSTYKA
-# =========================
 
 summary = (
     master_df
@@ -183,13 +218,6 @@ summary = (
         ostatnie_badanie=("Data badania", "max")
     )
 )
-
-print("\n===== CHARAKTERYSTYKA =====")
-print(summary)
-
-# =========================
-# ANALIZA SUVMAX
-# =========================
 
 suv_summary = (
     master_df
@@ -213,12 +241,6 @@ suv_summary["Trend"] = suv_summary["Zmiana_%"].apply(
     lambda x: "Progresja" if x > 0 else "Poprawa"
 )
 
-print("\n===== ANALIZA SUVMAX =====")
-print(suv_summary.round(2))
-# =========================
-# OSTATNI PET PACJENTA
-# =========================
-
 patient_status = (
     master_df
     .sort_values(["Pacjent", "Data badania"])
@@ -226,28 +248,39 @@ patient_status = (
     .tail(1)
 )
 
-print("\n===== ROZKŁAD ODPOWIEDZI =====")
-print(master_df["Ocena odpowiedzi"].value_counts())
+# =========================
+# FORMAT DAT DO EXCELA
+# =========================
 
-print("\n===== OSTATNI WYNIK PACJENTA =====")
-print(
-    patient_status[
-        ["Pacjent", "Ocena odpowiedzi", "Lugano", "Deauville"]
-    ].to_string(index=False)
+master_df["Data badania"] = (
+    master_df["Data badania"]
+    .dt.strftime("%d.%m.%Y")
 )
-print("\n===== SUVMAX =====")
-print(
-    master_df[
-        ["Pacjent", "Nr PET", "SUVmax"]
-    ].head(50)
-)
+
+# =========================
+# TABELA GŁÓWNA
+# =========================
+
+badania_export = master_df[
+    [
+        "Data badania",
+        "Nr badania",
+        "Etap leczenia",
+        "Linia leczenia",
+        "SUVmax",
+        "Deauville",
+        "Ocena odpowiedzi",
+        "Wnioski"
+    ]
+]
+
 # =========================
 # ZAPIS EXCEL
 # =========================
 
 with pd.ExcelWriter("Wyniki_HUBA.xlsx") as writer:
 
-    master_df.to_excel(
+    badania_export.to_excel(
         writer,
         sheet_name="Badania",
         index=False
@@ -257,6 +290,7 @@ with pd.ExcelWriter("Wyniki_HUBA.xlsx") as writer:
         writer,
         sheet_name="Pacjenci"
     )
+
     suv_summary.to_excel(
         writer,
         sheet_name="SUVmax"
@@ -268,4 +302,4 @@ with pd.ExcelWriter("Wyniki_HUBA.xlsx") as writer:
         index=False
     )
 
-print("\nZapisano: Wyniki_HUBA.xlsx")
+print("\nZapisano: Wyniki.xlsx")

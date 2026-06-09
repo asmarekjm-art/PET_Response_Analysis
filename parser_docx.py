@@ -3,12 +3,19 @@ import pandas as pd
 import re
 from pathlib import Path
 
-# folder z opisami DOCX
+# =====================================
+# FOLDER Z OPISAMI
+# =====================================
+
 folder = Path("opisy")
+
+# =====================================
+# PRZETWARZANIE PLIKÓW
+# =====================================
 
 for plik in folder.glob("*.docx"):
 
-    print(f"Przetwarzam: {plik.name}")
+    print(f"\nPrzetwarzam: {plik.name}")
 
     doc = Document(plik)
 
@@ -17,14 +24,84 @@ for plik in folder.glob("*.docx"):
         for paragraf in doc.paragraphs
     )
 
-    # wyszukiwanie dat
+    # =========================
+    # WYSZUKIWANIE DAT
+    # =========================
+
     pattern = r"\d{2}[,\.]\d{2}[,\.]\d{4}"
 
     daty = list(
         re.finditer(pattern, tekst)
     )
 
+    print(f"Znaleziono badań PET: {len(daty)}")
+
     badania = []
+
+
+    def get_lugano(response):
+
+        mapping = {
+
+            "Baseline":
+                "Badanie wyjściowe",
+
+            "CR":
+                "Complete Response (CR) - całkowita odpowiedź na leczenie",
+
+            "PR":
+                "Partial Response (PR) - częściowa odpowiedź na leczenie",
+
+            "SD":
+                "Stable Disease (SD) - stabilizacja choroby",
+
+            "PD":
+                "Progressive Disease (PD) - progresja choroby"
+
+        }
+
+        return mapping.get(response, "Unknown")
+
+
+    def get_response_description(response):
+
+        mapping = {
+            "Baseline": "Badanie wyjściowe przed rozpoczęciem leczenia",
+            "CR": "Całkowita odpowiedź metaboliczna",
+            "PR": "Częściowa odpowiedź metaboliczna",
+            "SD": "Stabilizacja choroby",
+            "PD": "Progresja choroby"
+        }
+
+        return mapping.get(response, "")
+
+
+    def get_deauville(response):
+
+        mapping = {
+
+            "Baseline":
+                "Nie dotyczy",
+
+            "CR":
+                "3 - wychwyt nie większy niż wątroba",
+
+            "PR":
+                "4 - wychwyt umiarkowanie większy od wątroby",
+
+            "SD":
+                "4 - utrzymujący się wychwyt patologiczny",
+
+            "PD":
+                "5 - znacznie zwiększony wychwyt lub nowe zmiany"
+
+        }
+
+        return mapping.get(response, "")
+
+    # =========================
+    # PODZIAŁ NA BADANIA
+    # =========================
 
     for i, match in enumerate(daty):
 
@@ -37,12 +114,19 @@ for plik in folder.glob("*.docx"):
 
         fragment = tekst[start:end]
 
+        # =========================
+        # DATA
+        # =========================
+
         data = (
             match.group()
             .replace(",", ".")
         )
 
-        # problem kliniczny
+        # =========================
+        # ETAP LECZENIA
+        # =========================
+
         problem = ""
 
         m = re.search(
@@ -52,9 +136,16 @@ for plik in folder.glob("*.docx"):
         )
 
         if m:
-            problem = m.group(1).strip()
+            problem = (
+                m.group(1)
+                .replace("\n", " ")
+                .strip()
+            )
 
-        # wnioski
+        # =========================
+        # WNIOSKI
+        # =========================
+
         wnioski = ""
 
         m = re.search(
@@ -64,14 +155,111 @@ for plik in folder.glob("*.docx"):
         )
 
         if m:
-            wnioski = m.group(1).strip()
+            wnioski = (
+                m.group(1)
+                .replace("\n", " ")
+                .strip()
+            )
+
+        # =========================
+        # SUVMAX
+        # =========================
+
+        suvy = re.findall(
+            r"SUV\s*max\s*(?:do)?\s*(\d+[,.]\d+)",
+            fragment,
+            flags=re.IGNORECASE
+        )
+
+        suvy = [
+            float(
+                x.replace(",", ".")
+            )
+            for x in suvy
+        ]
+
+        suvmax = max(suvy) if suvy else None
+
+        # =========================
+        # WYNIK PET
+        # =========================
+
+        txt = wnioski.lower()
+
+        if (
+            "nie uwidoczniono obecności aktywnej metabolicznie choroby"
+            in txt
+        ):
+
+            wynik_pet = "Brak aktywnej choroby"
+
+        elif (
+            "obecność aktywnej metabolicznie choroby chłoniakowej"
+            in txt
+        ):
+
+            wynik_pet = "Aktywna choroba"
+
+        else:
+
+            wynik_pet = "Do oceny"
+
+        # =========================
+        # OCENA ODPOWIEDZI
+        # =========================
+
+        if i == 0:
+
+            odpowiedz = "Baseline"
+
+        else:
+
+            if wynik_pet == "Brak aktywnej choroby":
+                odpowiedz = "CR"
+
+            elif "progres" in txt:
+                odpowiedz = "PD"
+
+            elif "regres" in txt:
+                odpowiedz = "PR"
+
+            else:
+                odpowiedz = "SD"
+        opis_odpowiedzi = get_response_description(
+            odpowiedz
+        )
+
+        lugano = get_lugano(
+            odpowiedz
+        )
+
+        deauville = get_deauville(
+            odpowiedz
+        )
+        # =========================
+        # DODANIE WIERSZA
+        # =========================
 
         badania.append({
+
             "Data badania": data,
-            "Nr PET": f"PET {i+1}",
+            "Nr PET": f"PET {i + 1}",
             "Etap leczenia": problem,
+            "Linia leczenia": "",
+            "Opis": wynik_pet,
+            "SUVmax": suvmax,
+            "Lokalizacja zmian": "",
+            "Ocena odpowiedzi": odpowiedz,
+            "Opis odpowiedzi": opis_odpowiedzi,
+            "Lugano": lugano,
+            "Deauville": deauville,
             "Wnioski": wnioski
+
         })
+
+    # =========================
+    # ZAPIS EXCEL
+    # =========================
 
     df = pd.DataFrame(badania)
 
@@ -85,3 +273,5 @@ for plik in folder.glob("*.docx"):
     )
 
     print(f"Zapisano: {zapis}")
+
+print("\nGotowe.")

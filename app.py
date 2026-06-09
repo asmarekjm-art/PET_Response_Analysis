@@ -149,7 +149,7 @@ st.dataframe(
         "Zmiana_%",
         ascending=True
     ),
-    use_container_width=True
+    width="stretch"
 )
 
 # =====================================
@@ -267,33 +267,66 @@ if len(suv) >= 2:
     else:
         ocena = "Progresja choroby"
 
-    raport = f"""
-Pacjent: {pacjent}
-
-Liczba badań PET: {len(dane)}
-
-SUVmax:
-{suv.iloc[0]:.1f} → {suv.iloc[-1]:.1f}
-
-Zmiana SUVmax:
-{zmiana:.1f}%
-
-Interpretacja:
-{ocena}
-
-Pierwsze badanie:
-{pierwsza_data.strftime('%d.%m.%Y')}
-
-Ostatnie badanie:
-{ostatnia_data.strftime('%d.%m.%Y')}
-"""
-
-    st.text_area(
-        "Raport",
-        raport,
-        height=250
+    etapy = " → ".join(
+        dane["Etap leczenia"]
+        .dropna()
+        .astype(str)
+        .unique()
     )
 
+    ostatni = (
+        dane
+        .sort_values("Data badania")
+        .iloc[-1]
+    )
+
+    raport = f"""
+    PACJENT
+
+    {pacjent}
+
+    PRZEBIEG DIAGNOSTYKI
+
+    Liczba badań PET/CT: {len(dane)}
+
+    Okres obserwacji:
+    {pierwsza_data.strftime('%d.%m.%Y')} - {ostatnia_data.strftime('%d.%m.%Y')}
+
+    PRZEBIEG LECZENIA
+
+    {etapy}
+
+    OCENA AKTYWNOŚCI METABOLICZNEJ
+
+    SUVmax początkowy: {suv.iloc[0]:.1f}
+
+    SUVmax końcowy: {suv.iloc[-1]:.1f}
+
+    Zmiana SUVmax:
+    {zmiana:.1f}%
+
+    OCENA ODPOWIEDZI
+
+    {ostatni['Ocena odpowiedzi']}
+
+    KLASYFIKACJA LUGANO
+
+    {ostatni['Lugano']}
+
+    SKALA DEAUVILLE
+
+    {ostatni['Deauville']}
+
+    INTERPRETACJA
+
+    {ocena}
+
+    WNIOSEK KOŃCOWY
+
+    {ostatni['Opis odpowiedzi']}
+    """
+with st.expander("📄 Raport kliniczny", expanded=True):
+    st.text(raport)
 # =====================================
 # HISTORIA BADAŃ
 # =====================================
@@ -302,5 +335,5 @@ st.subheader("📋 Historia badań PET")
 
 st.dataframe(
     dane,
-    use_container_width=True
+    width="stretch"
 )
