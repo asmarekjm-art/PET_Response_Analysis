@@ -35,8 +35,6 @@ def load_data():
 
 patients_df, pet_df = load_data()
 
-
-
 patients_df["Pacjent"] = (
     patients_df["IMIE"].astype(str).str.strip().str.upper()
     + " "
@@ -393,34 +391,33 @@ historia_df["Odpowiedź"] = (
     .fillna(historia_df["Odpowiedź"])
 )
 
-historia_df = patient_pet.copy()
-
 historia_df["Data badania"] = (
     historia_df["Data badania"]
     .dt.strftime("%d.%m.%Y")
 )
 
 response_short = {
-    "CR": "🟢 Całkowita odpowiedź",
-    "PR": "🔵 Częściowa odpowiedź",
-    "SD": "🟡 Stabilizacja choroby",
-    "PD": "🔴 Progresja choroby",
-    "UNCERTAIN": "⚪ Wynik niejednoznaczny"
+    "CR": "🟢 CR",
+    "PR": "🔵 PR",
+    "SD": "🟡 SD",
+    "PD": "🔴 PD",
+    "UNCERTAIN": "⚪ ?"
 }
 
 historia_df["Odpowiedź na leczenie"] = (
     historia_df["Odpowiedź"]
     .map(response_short)
+    .fillna(historia_df["Odpowiedź"])
 )
 
 st.dataframe(
     historia_df[
         [
-            "Data badania",
             "Nr PET",
-            "Etap_leczenia",
-            "Schemat",
+            "Data badania",
             "SUVmax_global",
+            "Glikemia",
+            "Czas_po_FDG",
             "Odpowiedź na leczenie"
         ]
     ],
@@ -428,16 +425,91 @@ st.dataframe(
     hide_index=True
 )
 
+
 # =====================================
 # RAPORT KLINICZNY
 # =====================================
+def short_text(text, max_sentences=4):
+    """
+    Wersja PRO skracania opisów PET:
+    - wykrywa zdania klinicznie istotne
+    - priorytetyzuje progresję, odpowiedź, aktywność metaboliczną
+    - wykrywa lokalizacje zmian
+    - pomija zdania opisowe i techniczne
+    - normalizuje wielokropki
+    """
+
+    if pd.isna(text):
+        return "-"
+
+    text = str(text).strip()
+    if text.lower() in ["nan", ""]:
+        return "-"
+
+    import re
+    zdania = re.split(r'(?<=[.!?])\s+', text)
+
+    # frazy klinicznie istotne
+    kluczowe = [
+        "fdg", "ognisk", "aktyw", "progres", "odpowied", "stabiliz",
+        "brak cech", "brak aktyw", "nacie", "zwiększ", "zmniejsz",
+        "metabolicz", "chorob", "zlokaliz", "węzł", "śródpiers",
+        "płuc", "kośc", "wątro", "śledzion", "naciekanie"
+    ]
+
+    # frazy do odrzucenia
+    smieci = [
+        "poza tym", "jak wyżej", "jak powyżej",
+        "do kontroli", "kontrolnie", "badanie wykonano",
+        "w porównaniu", "technika badania"
+    ]
+
+    def istotne(z):
+        z_low = z.lower()
+        if any(s in z_low for s in smieci):
+            return False
+        return any(k in z_low for k in kluczowe)
+
+    # --- ZAWSZE definiujemy czyste ---
+    czyste = []
+    for z in zdania:
+        z = z.strip()
+        if len(z) < 5:
+            continue
+        if any(s in z.lower() for s in smieci):
+            continue
+        czyste.append(z)
+
+    if not czyste:
+        return "-"
+
+    # wybór zdań istotnych
+    istotne_zdania = [z for z in czyste if istotne(z)]
+
+    # jeśli brak zdań istotnych -> bierzemy pierwsze sensowne
+    if not istotne_zdania:
+        wynik = " ".join(czyste[:max_sentences])
+    else:
+        wynik = " ".join(istotne_zdania[:max_sentences])
+
+    # --- NORMALIZACJA WIELOKROPKÓW ---
+    wynik = re.sub(r'\.{3,}', '...', wynik)      # zamień 3+ kropek na '...'
+    wynik = re.sub(r'\.\s*\.\s*\.', '...', wynik)  # usuń '... ...'
+    wynik = wynik.rstrip('.')                    # usuń kropkę na końcu
+
+    # dodaj końcowe "..." tylko jeśli tekst był dłuższy
+    if len(istotne_zdania) > max_sentences:
+        wynik += "..."
+
+    return wynik
+
 
 st.subheader("Raport kliniczny")
 
 for _, row in patient_pet.iterrows():
 
     with st.expander(
-        f"PET {row['Nr PET']} | {row['Data badania'].strftime('%d.%m.%Y')}"
+            f"PET {row['Nr PET']} | {row['Data badania'].strftime('%d.%m.%Y')}"
     ):
 
         odpowiedz = response_map.get(
@@ -445,30 +517,45 @@ for _, row in patient_pet.iterrows():
             row["Odpowiedź"]
         )
 
-        st.write(
-            f"**Odpowiedź:** {odpowiedz}"
-        )
-        st.write(
-            f"**Etap leczenia:** {row.get('Etap_leczenia', '-')}"
-        )
+        st.write(f"**Odpowiedź:** {odpowiedz}")
 
-        st.write(
-            f"**Schemat:** {row.get('Schemat', '-')}"
-        )
+        # --- OPISY ANATOMICZNE ---
+        st.divider()
 
-        st.write(
-            f"**SUVmax:** {row.get('SUVmax_global', '-')}"
-        )
+        col1, col2 = st.columns(2)
 
-        st.write(
-            f"**Glikemia:** {row.get('Glikemia', '-')}"
-        )
+        with col1:
+            st.markdown("#### 🧠 Głowa i szyja")
+            st.write(
+                short_text(
+                    row.get("Glowa_i_szyja", "")
+                )
+            )
 
-        st.write(
-            f"**Czas po FDG:** {row.get('Czas_po_FDG', '-')}"
-        )
+            st.markdown("#### 🫀 Brzuch i miednica")
+            st.write(
+                short_text(
+                    row.get("Brzuch_i_miednica", "")
+                )
+            )
 
-        wnioski = str(row["Wnioski"])
+        with col2:
+            st.markdown("#### 🫁 Klatka piersiowa")
+            st.write(
+                short_text(
+                    row.get("Klatka_piersiowa", "")
+                )
+            )
+
+            st.markdown("#### 🦴 Układ kostny")
+            st.write(
+                short_text(
+                    row.get("Uklad_kostny", "")
+                )
+            )
+
+        # --- WNIOSKI ---
+        wnioski = str(row.get("Wnioski", ""))
 
         frazy_do_usuniecia = [
             "Poza tym jak w opisie powyżej.",
@@ -484,6 +571,5 @@ for _, row in patient_pet.iterrows():
         for fraza in frazy_do_usuniecia:
             wnioski = wnioski.replace(fraza, "")
 
-        wnioski = wnioski.strip()
-
-        st.write(wnioski)
+        st.markdown("### 📝 Wnioski")
+        st.write(wnioski.strip())
