@@ -331,28 +331,6 @@ if not patient_info.empty and not patient_pet.empty:
             "Aktualny status: wynik niejednoznaczny"
         )
 
-    # Ostatnie wnioski
-
-    st.subheader("📋 Ostatnie wnioski kliniczne")
-
-    ostatnie_wnioski = patient_pet.iloc[-1]["Wnioski"]
-
-    frazy_do_usuniecia = [
-        "Poza tym jak w opisie powyżej.",
-        "Poza tym jak w opisie powyzej.",
-        "Poza tym jak w opisie powyżej",
-        "Poza tym jak w opisie powyzej"
-    ]
-
-    for fraza in frazy_do_usuniecia:
-        ostatnie_wnioski = ostatnie_wnioski.replace(fraza, "")
-
-    ostatnie_wnioski = ostatnie_wnioski.strip()
-
-    with st.container(border=True):
-        st.write(ostatnie_wnioski)
-
-
 # =====================================
 # HISTORIA PET
 # =====================================
@@ -365,11 +343,9 @@ response_map = {
     "UNCERTAIN": "Wynik niejednoznaczny"
 }
 
-st.subheader("📈 Przebieg leczenia")
 
 
-
-st.subheader("Historia badań PET")
+st.subheader("Historia badań PET/CT")
 
 historia_df = patient_pet.copy()
 
@@ -379,15 +355,36 @@ historia_df["Odpowiedź"] = (
     .fillna(historia_df["Odpowiedź"])
 )
 
+historia_df = patient_pet.copy()
+
+historia_df["Data badania"] = (
+    historia_df["Data badania"]
+    .dt.strftime("%d.%m.%Y")
+)
+
+response_short = {
+    "CR": "🟢 Całkowita odpowiedź",
+    "PR": "🔵 Częściowa odpowiedź",
+    "SD": "🟡 Stabilizacja choroby",
+    "PD": "🔴 Progresja choroby",
+    "UNCERTAIN": "⚪ Wynik niejednoznaczny"
+}
+
+historia_df["Odpowiedź na leczenie"] = (
+    historia_df["Odpowiedź"]
+    .map(response_short)
+)
+
 st.dataframe(
     historia_df[
         [
             "Nr PET",
             "Data badania",
-            "Odpowiedź"
+            "Odpowiedź na leczenie"
         ]
     ],
-    use_container_width=True
+    use_container_width=True,
+    hide_index=True
 )
 
 # =====================================
@@ -411,6 +408,22 @@ for _, row in patient_pet.iterrows():
             f"**Odpowiedź:** {odpowiedz}"
         )
 
-        st.write(
-            row["Wnioski"]
-        )
+        wnioski = str(row["Wnioski"])
+
+        frazy_do_usuniecia = [
+            "Poza tym jak w opisie powyżej.",
+            "Poza tym jak w opisie powyzej.",
+            "Poza tym jak w opisie powyżej",
+            "Poza tym jak w opisie powyzej",
+            "Poza tym, jak w opisie powyżej.",
+            "Poza tym, jak w opisie powyzej.",
+            "Poza tym, jak w opisie powyżej",
+            "Poza tym, jak w opisie powyzej"
+        ]
+
+        for fraza in frazy_do_usuniecia:
+            wnioski = wnioski.replace(fraza, "")
+
+        wnioski = wnioski.strip()
+
+        st.write(wnioski)
