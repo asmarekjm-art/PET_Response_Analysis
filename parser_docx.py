@@ -28,7 +28,7 @@ for plik in folder.glob("*.docx"):
     # WYSZUKIWANIE DAT
     # =========================
 
-    pattern = r"\d{2}[,\.]\d{2}[,\.]\d{4}"
+    pattern = r"\d{2}[,\.]\d{2}[,\.]\d{4}\s*\n\s*Zakres badania"
 
     daty = list(
         re.finditer(pattern, tekst)
@@ -118,10 +118,10 @@ for plik in folder.glob("*.docx"):
         # DATA
         # =========================
 
-        data = (
+        data = re.search(
+            r"\d{2}[,\.]\d{2}[,\.]\d{4}",
             match.group()
-            .replace(",", ".")
-        )
+        ).group().replace(",", ".")
 
         # =========================
         # ETAP LECZENIA
@@ -142,6 +142,33 @@ for plik in folder.glob("*.docx"):
                 .strip()
             )
 
+        rozpoznanie = ""
+
+        p = problem.lower()
+
+        if "marginal zone lymphoma" in p:
+            rozpoznanie = "MZL"
+
+        elif "malt" in p:
+            rozpoznanie = "MALT"
+
+        elif "mantle cell" in p or "komórek płaszcza" in p:
+            rozpoznanie = "MCL"
+
+        elif "dlbcl" in p:
+            rozpoznanie = "DLBCL"
+
+        elif "pmbcl" in p:
+            rozpoznanie = "PMBCL"
+
+        elif "follicular" in p:
+            rozpoznanie = "FL"
+
+        elif "hodgkin" in p or "ziarnica" in p:
+            rozpoznanie = "HL"
+
+        else:
+            rozpoznanie = "Inne"
         # =========================
         # WNIOSKI
         # =========================
@@ -281,6 +308,7 @@ for plik in folder.glob("*.docx"):
             "Nr badania": i + 1,
             "Etap leczenia": problem,
             "Linia leczenia": "",
+            "Rozpoznanie": rozpoznanie,
             "Opis": wynik_pet,
             "SUVmax": suvmax,
             "Ocena odpowiedzi": odpowiedz,

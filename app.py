@@ -142,19 +142,7 @@ with col4:
 
 st.divider()
 
-# =====================================
-# RANKING PACJENTÓW
-# =====================================
 
-st.subheader("🏆 Skuteczność leczenia")
-
-st.dataframe(
-    suv_summary.sort_values(
-        "Zmiana_%",
-        ascending=True
-    ),
-    width="stretch"
-)
 # =====================================
 # WYBÓR PACJENTA
 # =====================================
@@ -253,16 +241,13 @@ if len(suv) >= 1:
     )
 
     raport = f"""
-PACJENT
-
-{pacjent}
+PACJENT: {pacjent}
 
 PRZEBIEG DIAGNOSTYKI
 
 Liczba badań PET/CT: {len(dane)}
 
-Okres obserwacji:
-{pierwsza_data:%d.%m.%Y} - {ostatnia_data:%d.%m.%Y}
+Okres obserwacji: {pierwsza_data:%d.%m.%Y} - {ostatnia_data:%d.%m.%Y}
 
 PRZEBIEG LECZENIA
 
