@@ -3,6 +3,7 @@ import pandas as pd
 import re
 from pathlib import Path
 
+
 # =====================================
 # FOLDER Z OPISAMI
 # =====================================
@@ -141,6 +142,9 @@ for plik in folder.glob("*.docx"):
                 .replace("\n", " ")
                 .strip()
             )
+            print("=" * 80)
+            print(problem)
+
         problem = re.sub(
             r"^.*?(Ocena)",
             "Ocena",
@@ -152,6 +156,9 @@ for plik in folder.glob("*.docx"):
         p = problem.lower()
 
         if "marginal zone lymphoma" in p:
+            rozpoznanie = "MZL"
+
+        elif "marginal zone" in p:
             rozpoznanie = "MZL"
 
         elif "malt" in p:
@@ -170,12 +177,6 @@ for plik in folder.glob("*.docx"):
             rozpoznanie = "FL"
 
         elif "hodgkin" in p or "ziarnica" in p:
-            rozpoznanie = "HL"
-
-        elif "marginal zone" in p:
-            rozpoznanie = "MZL"
-
-        elif "ziarnica złośliwa" in p:
             rozpoznanie = "HL"
 
         else:
@@ -341,14 +342,14 @@ for plik in folder.glob("*.docx"):
         badania.append({
 
             "Data badania": data,
-            "Nr badania": i + 1,
             "Etap leczenia": problem,
             "Rozpoznanie": rozpoznanie,
             "SUVmax": suvmax,
             "Ocena odpowiedzi": odpowiedz,
             "Lugano": lugano,
             "Deauville": deauville,
-            "Wnioski": summary
+            "Wnioski": wnioski,
+            "Podsumowanie": summary
         })
 
     # =========================

@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 from pathlib import Path
 
+pacjenci_info = pd.read_excel(
+    "source/dane pacjentow.xlsx"
+)
+
+pacjenci_info = pacjenci_info.dropna(
+    subset=["IMIE", "NAZWISKO"]
+)
+
 # =====================================
 # KONFIGURACJA
 # =====================================
@@ -43,6 +51,11 @@ for file in folder.glob("*.xlsx"):
 
 master_df = pd.concat(all_data, ignore_index=True)
 
+rozpoznania = (
+    master_df
+    .groupby("Pacjent")["Rozpoznanie"]
+    .first()
+)
 # =====================================
 # CZYSZCZENIE DANYCH
 # =====================================
@@ -107,42 +120,114 @@ suv_summary = pd.DataFrame(suv_summary)
 # DASHBOARD GŁÓWNY
 # =====================================
 
-col1, col2, col3, col4 = st.columns(4)
+liczba_pacjentow = (
+    pacjenci_info[
+        ["IMIE", "NAZWISKO"]
+    ]
+    .drop_duplicates()
+    .shape[0]
+)
+
+plec = (
+    pacjenci_info["płeć"]
+    .astype(str)
+    .str.strip()
+    .str.lower()
+)
+
+kobiety = (
+    (plec == "kobieta") |
+    (plec == "kobiety")
+).sum()
+
+mezczyzni = (
+    (plec == "mężczyzna") |
+    (plec == "mezczyzna")
+).sum()
+
+brak_danych = (
+    liczba_pacjentow
+    - kobiety
+    - mezczyzni
+)
+
+sredni_wiek = round(
+    pacjenci_info[
+        "Wiek w chwili rozpoczęcia leczenia"
+    ].mean(),
+    1
+)
+
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     st.metric(
         "Pacjenci",
-        master_df["Pacjent"].nunique()
+        liczba_pacjentow
     )
 
 with col2:
     st.metric(
-        "Badania PET",
-        len(master_df)
+        "Kobiety",
+        kobiety
     )
 
 with col3:
     st.metric(
-        "Średnia PET/pacjenta",
-        round(
-            len(master_df)
-            / master_df["Pacjent"].nunique(),
-            1
-        )
+        "Mężczyźni",
+        mezczyzni
     )
 
 with col4:
     st.metric(
-        "Średni SUVmax",
-        round(
-            master_df["SUVmax"].mean(),
-            1
-        )
+        "Brak danych",
+        brak_danych
+    )
+
+with col5:
+    st.metric(
+        "Średni wiek",
+        sredni_wiek
     )
 
 st.divider()
 
+st.subheader("📊 Rozpoznania")
 
+rozpoznania_df = (
+    rozpoznania
+    .value_counts()
+    .reset_index()
+)
+
+rozpoznania_df.columns = [
+    "Rozpoznanie",
+    "Liczba pacjentów"
+]
+
+st.dataframe(
+    rozpoznania_df,
+    hide_index=True,
+    width="stretch"
+)
+st.subheader("📊 Charakterystyka grupy")
+
+choroby = (
+    pacjenci_info["CHOROBA"]
+    .value_counts()
+    .reset_index()
+)
+
+choroby.columns = [
+    "Rozpoznanie",
+    "Liczba pacjentów"
+]
+
+st.dataframe(
+    choroby,
+    hide_index=True,
+    width="stretch"
+)
 # =====================================
 # WYBÓR PACJENTA
 # =====================================
@@ -157,6 +242,13 @@ dane = (
         master_df["Pacjent"] == pacjent
     ]
     .sort_values("Data badania")
+)
+
+dane = dane.reset_index(drop=True)
+
+dane["Nr badania"] = range(
+    1,
+    len(dane) + 1
 )
 
 # =====================================
@@ -192,6 +284,13 @@ with col3:
 # =====================================
 # ZMIANA SUVMAX
 # =====================================
+zmiana = 0
+
+if len(suv) >= 2:
+    zmiana = (
+        (suv.iloc[-1] - suv.iloc[0])
+        / suv.iloc[0]
+    ) * 100
 
 ostatni = dane.iloc[-1]
 
@@ -326,27 +425,21 @@ with st.expander("📄 Raport kliniczny", expanded=True):
 
 st.subheader("📋 Historia badań PET")
 
-if "Nr PET" in dane.columns and "Nr badania" not in dane.columns:
-    dane["Nr badania"] = (
-        dane["Nr PET"]
-        .astype(str)
-        .str.replace("PET ", "", regex=False)
-    )
-
 kolumny = [
     col for col in [
-        "Data badania",
         "Nr badania",
+        "Data badania",
         "Etap leczenia",
-        "Linia leczenia",
         "SUVmax",
+        "Lugano",
         "Deauville",
         "Ocena odpowiedzi",
-        "Wnioski"
+        "Podsumowanie"
     ]
     if col in dane.columns
 ]
-dane_wyswietl = dane.copy()
+
+dane_wyswietl = dane[kolumny].copy()
 
 dane_wyswietl["Data badania"] = (
     pd.to_datetime(
@@ -355,7 +448,7 @@ dane_wyswietl["Data badania"] = (
 )
 
 st.dataframe(
-    historia.reset_index(drop=True),
+    dane_wyswietl.reset_index(drop=True),
     hide_index=True,
     width="stretch"
 )
