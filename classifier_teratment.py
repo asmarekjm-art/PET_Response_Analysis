@@ -36,12 +36,75 @@ TREATMENTS = {
 # EKSTRAKCJA LECZENIA
 # ==========================================
 
-def extract_treatment(text):
+def extract_treatment_info(text):
 
     if pd.isna(text):
-        return ""
+        return "", ""
 
     text = str(text)
+
+    text_lower = text.lower()
+
+    # ==========================
+    # ETAP LECZENIA
+    # ==========================
+
+    stage = "OTHER"
+
+    if any(x in text_lower for x in [
+        "ocena zaawansowania",
+        "pierwotna ocena",
+        "staging"
+    ]):
+        stage = "BASELINE"
+
+    elif re.search(r"po\s+\d+\s*(cykl|cyklach|kurs|kursach)", text_lower):
+        stage = "INTERIM"
+
+    elif any(x in text_lower for x in [
+        "po zakończeniu leczenia",
+        "po zakonczeniu leczenia",
+        "po leczeniu",
+        "ocena remisji"
+    ]):
+        stage = "END_OF_TREATMENT"
+
+    elif any(x in text_lower for x in [
+        "radioterapia",
+        "ifrt",
+        "isrt"
+    ]):
+        stage = "POST_RT"
+
+    elif any(x in text_lower for x in [
+        "autopbsct",
+        "autohsct",
+        "auto-hsct",
+        "auto hsct",
+        "autoprzeszczep"
+    ]):
+        stage = "POST_ASCT"
+
+    elif any(x in text_lower for x in [
+        "wznowa",
+        "nawrót",
+        "nawrot",
+        "progresja"
+    ]):
+        stage = "RELAPSE"
+
+    elif any(x in text_lower for x in [
+        "kontrola",
+        "badanie kontrolne",
+        "follow-up",
+        "follow up",
+        "obserwacja"
+    ]):
+        stage = "FOLLOW_UP"
+
+    # ==========================
+    # SCHEMAT
+    # ==========================
 
     found = []
 
@@ -50,8 +113,9 @@ def extract_treatment(text):
         if re.search(pattern, text, re.IGNORECASE):
             found.append(treatment)
 
-    return ", ".join(sorted(set(found)))
+    scheme = ", ".join(sorted(set(found)))
 
+    return stage, scheme
 # ==========================================
 # GŁÓWNA PĘTLA
 # ==========================================
@@ -74,8 +138,7 @@ for file in files:
         patient_name = file.stem
 
         for _, row in df.iterrows():
-
-            treatment = extract_treatment(
+            stage, scheme = extract_treatment_info(
                 row["Problem kliniczny"]
             )
 
@@ -83,7 +146,8 @@ for file in files:
                 "Pacjent": patient_name,
                 "Nr PET": row["Nr PET"],
                 "Problem kliniczny": row["Problem kliniczny"],
-                "Leczenie": treatment
+                "Etap_leczenia": stage,
+                "Schemat": scheme
             })
 
     except Exception as e:
