@@ -355,6 +355,7 @@ dane_wyswietl["Data badania"] = (
 )
 
 st.dataframe(
-    dane_wyswietl[kolumny],
+    historia.reset_index(drop=True),
+    hide_index=True,
     width="stretch"
 )

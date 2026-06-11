@@ -141,7 +141,12 @@ for plik in folder.glob("*.docx"):
                 .replace("\n", " ")
                 .strip()
             )
-
+        problem = re.sub(
+            r"^.*?(Ocena)",
+            "Ocena",
+            problem,
+            flags=re.IGNORECASE
+        )
         rozpoznanie = ""
 
         p = problem.lower()
@@ -165,6 +170,12 @@ for plik in folder.glob("*.docx"):
             rozpoznanie = "FL"
 
         elif "hodgkin" in p or "ziarnica" in p:
+            rozpoznanie = "HL"
+
+        elif "marginal zone" in p:
+            rozpoznanie = "MZL"
+
+        elif "ziarnica złośliwa" in p:
             rozpoznanie = "HL"
 
         else:
@@ -214,22 +225,25 @@ for plik in folder.glob("*.docx"):
         txt = wnioski.lower()
 
         if (
-            "nie uwidoczniono obecności aktywnej metabolicznie choroby"
-            in txt
+                "nie uwidoczniono" in txt
+                and "procesu chłoniakowego" in txt
         ):
-
             wynik_pet = "Brak aktywnej choroby"
 
         elif (
-            "obecność aktywnej metabolicznie choroby chłoniakowej"
-            in txt
+                "aktywnego metabolicznie procesu chłoniakowego" in txt
+                or "aktywny metabolicznie proces chłoniakowy" in txt
+                or "obecność aktywnej metabolicznie choroby" in txt
         ):
-
             wynik_pet = "Aktywna choroba"
 
         else:
-
             wynik_pet = "Do oceny"
+
+            print("\nDATA:", data)
+            print("WNIOSKI:")
+            print(wnioski[:500])
+            print("----------------")
 
         # =========================
         # OCENA ODPOWIEDZI
@@ -244,10 +258,32 @@ for plik in folder.glob("*.docx"):
             if wynik_pet == "Brak aktywnej choroby":
                 odpowiedz = "CR"
 
-            elif "progres" in txt:
+
+            elif (
+
+                    "progres" in txt
+
+                    or "zwiększenie" in txt
+
+                    or "więcej niż w badaniu poprzednim" in txt
+
+                    or "nowe ogniska" in txt
+
+            ):
+
                 odpowiedz = "PD"
 
-            elif "regres" in txt:
+
+            elif (
+
+                    "częściowa regresja" in txt
+
+                    or "regresja metaboliczna" in txt
+
+                    or "regresja radiologiczna" in txt
+
+            ):
+
                 odpowiedz = "PR"
 
             else:
@@ -307,11 +343,10 @@ for plik in folder.glob("*.docx"):
             "Data badania": data,
             "Nr badania": i + 1,
             "Etap leczenia": problem,
-            "Linia leczenia": "",
             "Rozpoznanie": rozpoznanie,
-            "Opis": wynik_pet,
             "SUVmax": suvmax,
             "Ocena odpowiedzi": odpowiedz,
+            "Lugano": lugano,
             "Deauville": deauville,
             "Wnioski": summary
         })
