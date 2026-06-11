@@ -35,6 +35,8 @@ def load_data():
 
 patients_df, pet_df = load_data()
 
+
+
 patients_df["Pacjent"] = (
     patients_df["IMIE"].astype(str).str.strip().str.upper()
     + " "
@@ -287,7 +289,43 @@ if not patient_info.empty and not patient_pet.empty:
     st.info(
         f"Rozpoznanie: {diagnosis_map.get(rozpoznanie, rozpoznanie)} ({icd10})"
     )
+    # Parametry PET
 
+    suv_values = pd.to_numeric(
+        patient_pet["SUVmax_global"],
+        errors="coerce"
+    )
+
+    glucose_values = pd.to_numeric(
+        patient_pet["Glikemia"],
+        errors="coerce"
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "Ostatni SUVmax",
+            round(suv_values.dropna().iloc[-1], 1)
+            if not suv_values.dropna().empty
+            else "-"
+        )
+
+    with col2:
+        st.metric(
+            "Maksymalny SUVmax",
+            round(suv_values.max(), 1)
+            if not suv_values.dropna().empty
+            else "-"
+        )
+
+    with col3:
+        st.metric(
+            "Średnia glikemia",
+            round(glucose_values.mean(), 1)
+            if not glucose_values.dropna().empty
+            else "-"
+        )
     # Obserwacja
 
     col1, col2 = st.columns(2)
@@ -378,8 +416,11 @@ historia_df["Odpowiedź na leczenie"] = (
 st.dataframe(
     historia_df[
         [
-            "Nr PET",
             "Data badania",
+            "Nr PET",
+            "Etap_leczenia",
+            "Schemat",
+            "SUVmax_global",
             "Odpowiedź na leczenie"
         ]
     ],
@@ -406,6 +447,25 @@ for _, row in patient_pet.iterrows():
 
         st.write(
             f"**Odpowiedź:** {odpowiedz}"
+        )
+        st.write(
+            f"**Etap leczenia:** {row.get('Etap_leczenia', '-')}"
+        )
+
+        st.write(
+            f"**Schemat:** {row.get('Schemat', '-')}"
+        )
+
+        st.write(
+            f"**SUVmax:** {row.get('SUVmax_global', '-')}"
+        )
+
+        st.write(
+            f"**Glikemia:** {row.get('Glikemia', '-')}"
+        )
+
+        st.write(
+            f"**Czas po FDG:** {row.get('Czas_po_FDG', '-')}"
         )
 
         wnioski = str(row["Wnioski"])
