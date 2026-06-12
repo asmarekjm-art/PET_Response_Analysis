@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import subprocess
+import sys
 
 # =====================================
 # KONFIGURACJA
 # =====================================
-
 
 st.set_page_config(
     page_title="PET Response Analysis",
@@ -13,7 +14,46 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("☢️ PET Response Analysis")
+# =====================================
+# NAGŁÓWEK
+# =====================================
+
+col1, col2 = st.columns([8, 1])
+
+with col1:
+    st.title("☢️ PET Response Analysis")
+
+with col2:
+
+    st.write("")  # lekkie wyrównanie w pionie
+
+    if st.button("🔄 Aktualizuj"):
+
+        with st.spinner("Przetwarzanie danych..."):
+
+            result = subprocess.run(
+                [sys.executable, "run_pipeline.py"],
+                capture_output=True,
+                text=True
+            )
+
+        if result.returncode == 0:
+
+            st.success(
+                "Baza została zaktualizowana."
+            )
+
+            st.cache_data.clear()
+
+            st.rerun()
+
+        else:
+
+            st.error(
+                "Wystąpił błąd podczas aktualizacji."
+            )
+
+            st.code(result.stderr)
 
 # =====================================
 # ŁADOWANIE DANYCH
