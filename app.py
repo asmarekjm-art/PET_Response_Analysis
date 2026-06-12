@@ -135,7 +135,7 @@ with left:
 
     st.plotly_chart(
         fig,
-        use_container_width=True
+        width="stretch"
     )
 
 with right:
@@ -161,7 +161,7 @@ with right:
 
     st.plotly_chart(
         fig,
-        use_container_width=True
+        width="stretch"
     )
 
 # =====================================
@@ -176,22 +176,67 @@ cross = pd.crosstab(
     pet_df["Rozpoznanie"],
     pet_df["Odpowiedź"]
 )
-
-st.dataframe(
-    cross,
-    use_container_width=True
-)
-
 heatmap = px.imshow(
     cross,
     text_auto=True,
     aspect="auto"
 )
 
-st.plotly_chart(
-    heatmap,
-    use_container_width=True
+heatmap.update_layout(
+    xaxis_title="Odpowiedź",
+    yaxis_title="Rozpoznanie"
 )
+tab1, tab2, tab3 = st.tabs([
+    "Liczebności",
+    "Procenty",
+    "Heatmapa"
+])
+# liczebności
+cross = pd.crosstab(
+    pet_df["Rozpoznanie"],
+    pet_df["Odpowiedź"]
+)
+
+# procenty w obrębie rozpoznania
+cross_percent = (
+    pd.crosstab(
+        pet_df["Rozpoznanie"],
+        pet_df["Odpowiedź"],
+        normalize="index"
+    ) * 100
+).round(1)
+
+# heatmapa procentowa
+heatmap = px.imshow(
+    cross_percent,
+    text_auto=True,
+    aspect="auto"
+)
+
+heatmap.update_layout(
+    xaxis_title="Odpowiedź",
+    yaxis_title="Rozpoznanie"
+)
+with tab1:
+
+    st.dataframe(
+        cross,
+        width="stretch"
+    )
+
+with tab2:
+
+    st.dataframe(
+        cross_percent,
+        width="stretch"
+    )
+
+with tab3:
+
+    st.plotly_chart(
+        heatmap,
+        width="stretch"
+    )
 # =====================================
 # PACJENT
 # =====================================
@@ -287,6 +332,18 @@ if not patient_info.empty and not patient_pet.empty:
     st.info(
         f"Rozpoznanie: {diagnosis_map.get(rozpoznanie, rozpoznanie)} ({icd10})"
     )
+    #rodzaj leczenia
+    if "Leczenie" in patient_row.index:
+
+        leczenie = str(
+            patient_row["Leczenie"]
+        ).strip()
+
+        if leczenie and leczenie.lower() != "nan":
+            st.info(
+                f"💊 Leczenie: {leczenie}"
+            )
+
     # Parametry PET
 
     suv_values = pd.to_numeric(
@@ -379,23 +436,6 @@ response_map = {
     "UNCERTAIN": "Wynik niejednoznaczny"
 }
 
-
-
-st.subheader("Historia badań PET/CT")
-
-historia_df = patient_pet.copy()
-
-historia_df["Odpowiedź"] = (
-    historia_df["Odpowiedź"]
-    .map(response_map)
-    .fillna(historia_df["Odpowiedź"])
-)
-
-historia_df["Data badania"] = (
-    historia_df["Data badania"]
-    .dt.strftime("%d.%m.%Y")
-)
-
 response_short = {
     "CR": "🟢 CR",
     "PR": "🔵 PR",
@@ -404,40 +444,119 @@ response_short = {
     "UNCERTAIN": "⚪ ?"
 }
 
+stage_map = {
+    "BASELINE": "Ocena zaawansowania",
+    "INTERIM": "Ocena śródleczeniowa",
+    "END_OF_TREATMENT": "Po zakończeniu leczenia",
+    "POST_RT": "Po radioterapii",
+    "POST_ASCT": "Po autoprzeszczepieniu",
+    "RELAPSE": "Podejrzenie wznowy",
+    "FOLLOW_UP": "Kontrola",
+    "OTHER": "-"
+}
+
+st.subheader("Historia badań PET/CT")
+
+historia_df = patient_pet.copy()
+
+# pełne nazwy odpowiedzi
+historia_df["Odpowiedź pełna"] = (
+    historia_df["Odpowiedź"]
+    .map(response_map)
+    .fillna(historia_df["Odpowiedź"])
+)
+
+# skrócone odpowiedzi z ikonami
 historia_df["Odpowiedź na leczenie"] = (
     historia_df["Odpowiedź"]
     .map(response_short)
     .fillna(historia_df["Odpowiedź"])
 )
 
+# tłumaczenie etapu leczenia — KLUCZOWE, musi być przed tabelą
+historia_df["Etap"] = (
+    historia_df["Etap_leczenia"]
+    .map(stage_map)
+    .fillna("-")
+)
+
+# format daty
+historia_df["Data badania"] = (
+    historia_df["Data badania"]
+    .dt.strftime("%d.%m.%Y")
+)
+historia_df = historia_df.rename(
+    columns={
+        "SUVmax_global": "SUVmax",
+        "Czas_po_FDG": "Czas FDG [min]"
+    }
+)
+# tabela
 st.dataframe(
     historia_df[
         [
             "Nr PET",
             "Data badania",
-            "SUVmax_global",
+            "Etap",
+            "SUVmax",
             "Glikemia",
-            "Czas_po_FDG",
+            "Czas FDG [min]",
             "Odpowiedź na leczenie"
         ]
     ],
-    use_container_width=True,
+    width="stretch",
     hide_index=True
 )
 
+#======================================
+#SUVmax w czasie
+#=====================================
+st.subheader("📈 SUVmax w czasie")
+
+suv_chart = patient_pet.copy()
+
+suv_chart["SUVmax_global"] = pd.to_numeric(
+    suv_chart["SUVmax_global"],
+    errors="coerce"
+)
+
+suv_chart = suv_chart.dropna(
+    subset=["SUVmax_global"]
+)
+
+if len(suv_chart) > 1:
+    fig = px.line(
+        suv_chart,
+        x="Data badania",
+        y="SUVmax_global",
+        markers=True
+    )
+    fig.update_traces(
+        text=[
+            f"PET {pet}<br>{resp}"
+            for pet, resp in zip(
+                suv_chart["Nr PET"],
+                suv_chart["Odpowiedź"]
+            )
+        ],
+        textposition="top center"
+    )
+
+    fig.update_layout(
+        xaxis_title="Data badania",
+        yaxis_title="SUVmax"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch"
+    )
 
 # =====================================
 # RAPORT KLINICZNY
 # =====================================
 def short_text(text, max_sentences=4):
-    """
-    Wersja PRO skracania opisów PET:
-    - wykrywa zdania klinicznie istotne
-    - priorytetyzuje progresję, odpowiedź, aktywność metaboliczną
-    - wykrywa lokalizacje zmian
-    - pomija zdania opisowe i techniczne
-    - normalizuje wielokropki
-    """
+
 
     if pd.isna(text):
         return "-"
