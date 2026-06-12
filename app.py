@@ -588,6 +588,24 @@ st.dataframe(
     width="stretch",
     hide_index=True
 )
+st.subheader("Lokalizacja zmian")
+for _, row in historia_df.iterrows():
+
+    with st.expander(
+        f"PET {row['Nr PET']} | {row['Data badania']}"
+    ):
+
+        st.markdown("### Głowa i szyja")
+        st.write(row["Glowa_i_szyja"])
+
+        st.markdown("### Klatka piersiowa")
+        st.write(row["Klatka_piersiowa"])
+
+        st.markdown("### Brzuch i miednica")
+        st.write(row["Brzuch_i_miednica"])
+
+        st.markdown("### Układ kostny")
+        st.write(row["Uklad_kostny"])
 # =====================================
 # RAPORT KLINICZNY
 # =====================================
