@@ -166,6 +166,7 @@ with col1:
         liczba_pacjentow
     )
 
+
 with col2:
     st.metric(
         "Badania PET",
@@ -587,51 +588,6 @@ st.dataframe(
     width="stretch",
     hide_index=True
 )
-
-#======================================
-#SUVmax w czasie
-#=====================================
-st.subheader("📈 SUVmax w czasie")
-
-suv_chart = patient_pet.copy()
-
-suv_chart["SUVmax_global"] = pd.to_numeric(
-    suv_chart["SUVmax_global"],
-    errors="coerce"
-)
-
-suv_chart = suv_chart.dropna(
-    subset=["SUVmax_global"]
-)
-
-if len(suv_chart) > 1:
-    fig = px.line(
-        suv_chart,
-        x="Data badania",
-        y="SUVmax_global",
-        markers=True
-    )
-    fig.update_traces(
-        text=[
-            f"PET {pet}<br>{resp}"
-            for pet, resp in zip(
-                suv_chart["Nr PET"],
-                suv_chart["Odpowiedź"]
-            )
-        ],
-        textposition="top center"
-    )
-
-    fig.update_layout(
-        xaxis_title="Data badania",
-        yaxis_title="SUVmax"
-    )
-
-    st.plotly_chart(
-        fig,
-        width="stretch"
-    )
-
 # =====================================
 # RAPORT KLINICZNY
 # =====================================

@@ -239,6 +239,9 @@ for plik in folder_opisy.glob("*.docx"):
 
         suvmax = max(suvy) if suvy else None
 
+        print("\n" + "=" * 80)
+        print(plik.name)
+        print(sorted(suvy, reverse=True)[:20])
         # =====================================
         # ZAPIS BADANIA
         # =====================================

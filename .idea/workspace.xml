@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików">
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa w nazwie claffisier treatment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier_teratment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" afterDir="false" />
@@ -57,6 +57,7 @@
       <change beforePath="$PROJECT_DIR$/pacjenci/RYSZARD PASZKO.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/RYSZARD PASZKO.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/SYLWESTER JASNOS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SYLWESTER JASNOS.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/SYLWIA GMER.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SYLWIA GMER.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser_pet.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser_pet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,11 +360,26 @@
       <option name="project" value="LOCAL" />
       <updated>1781248718665</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="poprawa w nazwie claffisier treatment">
+      <option name="closed" value="true" />
+      <created>1781249553234</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1781249553234</updated>
+    </task>
+    <task id="LOCAL-00030" summary="poprawa w nazwie claffisier treatment">
+      <option name="closed" value="true" />
+      <created>1781249680161</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1781249680161</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="podstawy projektu" />
     <MESSAGE value="wczytywanie danych" />
     <MESSAGE value="wczytywanie danych, podstawy czysczenia" />
     <MESSAGE value="wczypoprawa wczytywania danych, z jednego pliku na kilka osobych i bardziej szczegolowych dla kazdego pacjenta" />
@@ -388,6 +404,7 @@
     <MESSAGE value="dodane skrocona czesci opisu do raportu klinicznego" />
     <MESSAGE value="automatyczne aktualizowanie bazy" />
     <MESSAGE value="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików" />
-    <option name="LAST_COMMIT_MESSAGE" value="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików" />
+    <MESSAGE value="poprawa w nazwie claffisier treatment" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawa w nazwie claffisier treatment" />
   </component>
 </project>
