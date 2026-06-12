@@ -75,11 +75,51 @@ def load_data():
 
 patients_df, pet_df = load_data()
 
+import unicodedata
+
+def normalize_patient_name(name):
+
+    if pd.isna(name):
+        return ""
+
+    name = str(name).upper().strip()
+
+    name = ''.join(
+        c for c in unicodedata.normalize('NFD', name)
+        if unicodedata.category(c) != 'Mn'
+    )
+
+    name = " ".join(name.split())
+
+    parts = sorted(name.split())
+
+    return " ".join(parts)
+
+
 patients_df["Pacjent"] = (
-    patients_df["IMIE"].astype(str).str.strip().str.upper()
+    patients_df["IMIE"].astype(str)
     + " "
-    + patients_df["NAZWISKO"].astype(str).str.strip().str.upper()
+    + patients_df["NAZWISKO"].astype(str)
 )
+
+patients_df["Pacjent"] = (
+    patients_df["Pacjent"]
+    .apply(normalize_patient_name)
+)
+
+pet_df["Pacjent"] = (
+    pet_df["Pacjent"]
+    .apply(normalize_patient_name)
+)
+patients_df = patients_df[
+    patients_df["Pacjent"].notna()
+]
+
+patients_df = patients_df[
+    patients_df["Pacjent"].str.strip() != ""
+]
+
+
 # =====================================
 # PRZYGOTOWANIE
 # =====================================
