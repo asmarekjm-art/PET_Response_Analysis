@@ -4,68 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa wnioskow">
-      <change afterPath="$PROJECT_DIR$/analiza_fraz.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser_pet.py" afterDir="false" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/pacjenci.ods" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ANDRZEJ PIETRAS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANDRZEJ PIETRAS.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ANNA BĄK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANNA BĄK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ANNA PALUCH.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANNA PALUCH.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ANNA TOKARCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANNA TOKARCZYK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ANTONI KASPRZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANTONI KASPRZYK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ANTONI SAJDAK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANTONI SAJDAK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/BARBARA KWARCINSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/BARBARA KWARCINSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/BOLESŁAW KOWALCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/BOLESŁAW KOWALCZYK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/DOROTA PIETRAS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/DOROTA PIETRAS.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/DOROTA WRÓBEL.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/DOROTA WRÓBEL.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/EDWARD DRAPAŁA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EDWARD DRAPAŁA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ELŻBIETA GALAS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ELŻBIETA GALAS.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ELŻBIETA ŚCIOBŁOWSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ELŻBIETA ŚCIOBŁOWSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/EUGENIUSZ RACHWAŁ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EUGENIUSZ RACHWAŁ.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/EWA PAŃSZCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EWA PAŃSZCZYK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/EWELINA STRZYŻ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EWELINA STRZYŻ.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/GRZEGORZ JARECKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/GRZEGORZ JARECKI.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/GRZEGORZ KOSOWSKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/GRZEGORZ KOSOWSKI.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/HALINA JASIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/HALINA JASIK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/HALINA LEWIŃSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/HALINA LEWIŃSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/IZABELA KATYŃSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/IZABELA KATYŃSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/JAN TRACZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JAN TRACZ.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/JANUSZ FRONT.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JANUSZ FRONT.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/JOANNA KLĘP.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JOANNA KLĘP.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/JUSTYNA GARA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JUSTYNA GARA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/JÓZEF OKŁA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JÓZEF OKŁA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/KAROLINA RADWAŃSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KAROLINA RADWAŃSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/KATARZYNA BARCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KATARZYNA BARCZYK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/KRZYSZTOF JERZYKOWSKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KRZYSZTOF JERZYKOWSKI.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/KRZYSZTOF OSAK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KRZYSZTOF OSAK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/KURZEJA ROMAN.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KURZEJA ROMAN.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/LUDWIK KOZINA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/LUDWIK KOZINA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MAREK RZEPKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MAREK RZEPKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MARTA FISZBAIN.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MARTA FISZBAIN.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MARTA ZMUDA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MARTA ZMUDA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MARZENA SOBOLEWSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MARZENA SOBOLEWSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MATEUSZ JANIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATEUSZ JANIK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MATEUSZ KRÓL.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATEUSZ KRÓL.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MATYLDA FIREK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATYLDA FIREK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MATYLDA MOROWIEC.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATYLDA MOROWIEC.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MAŁGORZATA STACHERA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MAŁGORZATA STACHERA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MEDYNSKI MARCIN.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MEDYNSKI MARCIN.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/MICHAŁ TRZÓSŁO.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MICHAŁ TRZÓSŁO.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/OLEKSANDR ZAKREVSKYI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/OLEKSANDR ZAKREVSKYI.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/RENATA PIROWSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/RENATA PIROWSKA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ROBERT CHOJNOWSK1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ROBERT CHOJNOWSK1.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ROBERT CHOJNOWSKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ROBERT CHOJNOWSKI.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/ROMAN SŁOTA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ROMAN SŁOTA.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/RYSZARD PASZKO.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/RYSZARD PASZKO.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/SEBASTIAN TAMASIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SEBASTIAN TAMASIK.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/SYLWESTER JASNOS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SYLWESTER JASNOS.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pacjenci/SYLWIA GMER.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SYLWIA GMER.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser_docx.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser_docx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merge_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/merge_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser_pet.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser_pet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,22 +44,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.app.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.parser_docx.executor": "Run",
-    "Python.parser_pet.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app_v2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.classifier_details.executor&quot;: &quot;Run&quot;,
+    &quot;Python.classifier_diagnosis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.classifier_response.executor&quot;: &quot;Run&quot;,
+    &quot;Python.classifier_teratment.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.merge_results.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parser_docx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parser_pet.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\asmar\PET_Response_Analysis" />
@@ -234,11 +182,130 @@
       <option name="project" value="LOCAL" />
       <updated>1781000590890</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="nowy parser, podzial opisu na czesci, data rozpoznanie, dane kliniczne , opis i wniosi">
+      <option name="closed" value="true" />
+      <created>1781176235584</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1781176235584</updated>
+    </task>
+    <task id="LOCAL-00014" summary="stworzenie analizy rozpoznania pacjentow i stworzenie bazy danyc z zozpoznaniem i klasyfikacja iCD10">
+      <option name="closed" value="true" />
+      <created>1781179311220</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1781179311220</updated>
+    </task>
+    <task id="LOCAL-00015" summary="stworzenie classifier do podzialu odpowiedzi na lecznie na pd, pr, sd i cr">
+      <option name="closed" value="true" />
+      <created>1781180648135</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1781180648135</updated>
+    </task>
+    <task id="LOCAL-00016" summary="polaczenie stworzonych plikow excel">
+      <option name="closed" value="true" />
+      <created>1781181073141</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1781181073141</updated>
+    </task>
+    <task id="LOCAL-00017" summary="nowy streamlit">
+      <option name="closed" value="true" />
+      <created>1781188397155</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1781188397155</updated>
+    </task>
+    <task id="LOCAL-00018" summary="poprawione informacje o pacjencie, przebiegu leczenia">
+      <option name="closed" value="true" />
+      <created>1781192903799</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1781192903814</updated>
+    </task>
+    <task id="LOCAL-00019" summary="popawan czesci o pacjencie i informacjach o pet/ct">
+      <option name="closed" value="true" />
+      <created>1781193682105</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1781193682105</updated>
+    </task>
+    <task id="LOCAL-00020" summary="utworzenie pliku classifer details do wyciagniecia informacji z opisow o glikeni, czasie po jakim wykonano badanie, inf szczegolowych o wyniku badania( glowa, klp, brzuch miednica, kosci)">
+      <option name="closed" value="true" />
+      <created>1781194259801</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1781194259801</updated>
+    </task>
+    <task id="LOCAL-00021" summary="utworzenie pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta">
+      <option name="closed" value="true" />
+      <created>1781194849333</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1781194849333</updated>
+    </task>
+    <task id="LOCAL-00022" summary="upoprawa pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta">
+      <option name="closed" value="true" />
+      <created>1781195070758</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1781195070758</updated>
+    </task>
+    <task id="LOCAL-00023" summary="poprawainformacji o pacjencie bardziej szczegolowe raporty pet">
+      <option name="closed" value="true" />
+      <created>1781197308139</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1781197308139</updated>
+    </task>
+    <task id="LOCAL-00024" summary="dodane skrocona czesci opisu do raportu klinicznego">
+      <option name="closed" value="true" />
+      <created>1781200624724</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1781200624724</updated>
+    </task>
+    <task id="LOCAL-00025" summary="automatyczne aktualizowanie bazy">
+      <option name="closed" value="true" />
+      <created>1781244190489</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1781244190489</updated>
+    </task>
+    <task id="LOCAL-00026" summary="automatyczne aktualizowanie bazy">
+      <option name="closed" value="true" />
+      <created>1781244928225</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1781244928225</updated>
+    </task>
+    <task id="LOCAL-00027" summary="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików">
+      <option name="closed" value="true" />
+      <created>1781245711953</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1781245711953</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="tworzenie podstaw do projektu" />
     <MESSAGE value="podstawy projektu" />
     <MESSAGE value="wczytywanie danych" />
     <MESSAGE value="wczytywanie danych, podstawy czysczenia" />
@@ -250,6 +317,20 @@
     <MESSAGE value="generowanie podsumowania w excel z .doxc" />
     <MESSAGE value="poprawiono raport" />
     <MESSAGE value="poprawa wnioskow" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawa wnioskow" />
+    <MESSAGE value="nowy parser, podzial opisu na czesci, data rozpoznanie, dane kliniczne , opis i wniosi" />
+    <MESSAGE value="stworzenie analizy rozpoznania pacjentow i stworzenie bazy danyc z zozpoznaniem i klasyfikacja iCD10" />
+    <MESSAGE value="stworzenie classifier do podzialu odpowiedzi na lecznie na pd, pr, sd i cr" />
+    <MESSAGE value="polaczenie stworzonych plikow excel" />
+    <MESSAGE value="nowy streamlit" />
+    <MESSAGE value="poprawione informacje o pacjencie, przebiegu leczenia" />
+    <MESSAGE value="popawan czesci o pacjencie i informacjach o pet/ct" />
+    <MESSAGE value="utworzenie pliku classifer details do wyciagniecia informacji z opisow o glikeni, czasie po jakim wykonano badanie, inf szczegolowych o wyniku badania( glowa, klp, brzuch miednica, kosci)" />
+    <MESSAGE value="utworzenie pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
+    <MESSAGE value="upoprawa pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
+    <MESSAGE value="poprawainformacji o pacjencie bardziej szczegolowe raporty pet" />
+    <MESSAGE value="dodane skrocona czesci opisu do raportu klinicznego" />
+    <MESSAGE value="automatyczne aktualizowanie bazy" />
+    <MESSAGE value="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików" />
+    <option name="LAST_COMMIT_MESSAGE" value="sprawdzenie nazwisk i imion pacjentow i znormalizowanie danych z roznych plików" />
   </component>
 </project>

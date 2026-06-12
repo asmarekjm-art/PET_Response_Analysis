@@ -13,6 +13,14 @@ PLIK_ODPOWIEDZI = Path(
     "source/wnioski_pet.xlsx"
 )
 
+PLIK_DETAILS = Path(
+    "source/pet_details.xlsx"
+)
+
+PLIK_LECZENIE = Path(
+    "source/leczenie_pet.xlsx"
+)
+
 PLIK_WYNIK = Path(
     "source/pet_master.xlsx"
 )
@@ -29,8 +37,16 @@ df_resp = pd.read_excel(
     PLIK_ODPOWIEDZI
 )
 
+df_details = pd.read_excel(
+    PLIK_DETAILS
+)
+
+df_treatment = pd.read_excel(
+    PLIK_LECZENIE
+)
+
 # =====================================
-# ŁĄCZENIE
+# ROZPOZNANIA
 # =====================================
 
 df_master = df_resp.merge(
@@ -42,9 +58,44 @@ df_master = df_resp.merge(
     ]],
 
     on="Pacjent",
+    how="left"
+)
+
+# =====================================
+# DETAILS
+# =====================================
+
+df_master = df_master.merge(
+
+    df_details,
+
+    on=[
+        "Pacjent",
+        "Nr PET"
+    ],
 
     how="left"
+)
 
+# =====================================
+# LECZENIE
+# =====================================
+
+df_master = df_master.merge(
+
+    df_treatment[[
+        "Pacjent",
+        "Nr PET",
+        "Etap_leczenia",
+        "Schemat"
+    ]],
+
+    on=[
+        "Pacjent",
+        "Nr PET"
+    ],
+
+    how="left"
 )
 
 # =====================================
@@ -52,14 +103,47 @@ df_master = df_resp.merge(
 # =====================================
 
 df_master = df_master[[
+
     "Pacjent",
-    "Nr PET",
+
     "Rozpoznanie",
     "ICD10",
+
+    "Nr PET",
     "Data badania",
+
+    "Etap_leczenia",
+    "Schemat",
+
     "Odpowiedź",
+
+    "Glikemia",
+    "Czas_po_FDG",
+    "SUVmax_global",
+
+    "Problem_kliniczny",
+
+    "Glowa_i_szyja",
+    "Klatka_piersiowa",
+    "Brzuch_i_miednica",
+    "Uklad_kostny",
+
     "Wnioski"
 ]]
+
+# =====================================
+# SORTOWANIE
+# =====================================
+
+df_master["Data badania"] = pd.to_datetime(
+    df_master["Data badania"],
+    format="%d.%m.%Y",
+    errors="coerce"
+)
+
+df_master = df_master.sort_values(
+    ["Pacjent", "Data badania"]
+)
 
 # =====================================
 # ZAPIS
@@ -70,10 +154,10 @@ df_master.to_excel(
     index=False
 )
 
-print(
-    f"\nZapisano: {PLIK_WYNIK}"
-)
-
-print(
-    f"Liczba badań: {len(df_master)}"
-)
+print()
+print("=" * 60)
+print("PET MASTER")
+print("=" * 60)
+print(f"Zapisano: {PLIK_WYNIK}")
+print(f"Liczba badań: {len(df_master)}")
+print("=" * 60)

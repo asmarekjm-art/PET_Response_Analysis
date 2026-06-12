@@ -97,32 +97,99 @@ for plik in folder_opisy.glob("*.docx"):
         # ZAKRES BADANIA
         # =====================================
 
+
         zakres = ""
 
         m = re.search(
-            r"Zakres badania:(.*?)(Problem kliniczny:)",
+            r"Zakres badania:\s*(.*?)\s*Akwizycję",
             fragment,
             re.S
         )
 
         if m:
+            zakres = m.group(1).strip()
 
-            zakres = (
-                m.group(1)
-                .replace("\n", " ")
-                .strip()
-            )
+#glikemia
+        glikemia = ""
 
+        m = re.search(
+            r"Glikemia:\s*(\d+)",
+            fragment,
+            re.I
+        )
+
+        if m:
+            glikemia = m.group(1)
+
+# czas po podaniu FDG
+        czas_po_fdg = ""
+
+        m = re.search(
+            r"po\s*(\d+)\s*min",
+            fragment,
+            re.I
+        )
+
+        if m:
+            czas_po_fdg = m.group(1)
         # =====================================
         # OPIS BADANIA
         # =====================================
+        def extract_section(text, start, ends):
 
-        opis = ""
+            pattern = (
+                    start +
+                    r"(.*?)" +
+                    "(" + "|".join(ends) + ")"
+            )
 
-        m = re.search(
-            r"Głowa i szyja(.*?)Wnioski:",
+            m = re.search(
+                pattern,
+                text,
+                re.S | re.I
+            )
+
+            if m:
+                return (
+                    m.group(1)
+                    .replace("\n", " ")
+                    .strip()
+                )
+
+            return ""
+
+
+        glowa_szyja = extract_section(
             fragment,
-            re.S
+            r"Głowa i szyja:",
+            [
+                r"Klatka piersiowa i śródpiersie:"
+            ]
+        )
+
+        klatka_piersiowa = extract_section(
+            fragment,
+            r"Klatka piersiowa i śródpiersie:",
+            [
+                r"Brzuch i miednica:"
+            ]
+        )
+
+        brzuch_miednica = extract_section(
+            fragment,
+            r"Brzuch i miednica:",
+            [
+                r"Układ kostny:"
+            ]
+        )
+
+        uklad_kostny = extract_section(
+            fragment,
+            r"Układ kostny:",
+            [
+                r"Wartości referencyjne:",
+                r"Wnioski:"
+            ]
         )
 
         if m:
@@ -178,20 +245,23 @@ for plik in folder_opisy.glob("*.docx"):
 
         badania.append({
 
-            "Nr badania": i + 1,
-
+            "Nr PET": i + 1,
             "Data badania": data,
 
             "Problem kliniczny": problem,
 
             "Zakres badania": zakres,
+            "Glikemia": glikemia,
+            "Czas po FDG": czas_po_fdg,
 
-            "Opis badania": opis,
+            "Głowa i szyja": glowa_szyja,
+            "Klatka piersiowa": klatka_piersiowa,
+            "Brzuch i miednica": brzuch_miednica,
+            "Układ kostny": uklad_kostny,
 
             "Wnioski": wnioski,
 
-            "SUVmax": suvmax
-
+            "SUVmax_global": suvmax
         })
 
     # =====================================
