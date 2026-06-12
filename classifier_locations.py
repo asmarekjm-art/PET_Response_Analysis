@@ -14,36 +14,47 @@ OUTPUT_FILE = Path("source/locations.xlsx")
 # =====================================
 
 LOCATION_RULES = {
-    "Śródpiersie": [
-        "śródpiersi",
-        "srodpiersi"
+
+    "Węzły chłonne szyjne": [
+        "węzły chłonne szyjne",
+        "węzły szyjne",
+        "szyjne"
     ],
 
-    "Płuco": [
-        "płuc",
-        "pluc"
+    "Węzły chłonne pachowe": [
+        "węzły chłonne pachowe",
+        "pachowe"
     ],
 
-    "Węzły": [
-        "węzł",
-        "wezl"
+    "Węzły chłonne śródpiersia": [
+        "śródpiersiu",
+        "śródpiersia",
+        "przytchawicze",
+        "okna aortalno-płucnego",
+        "podostrogowe"
+    ],
+
+    "Węzły chłonne pachwinowe": [
+        "pachwinowe"
+    ],
+
+    "Węzły chłonne zaotrzewnowe": [
+        "okołoaortal",
+        "zaotrzewnow",
+        "przyaortal"
+    ],
+
+    "Węzły chłonne krezkowe": [
+        "krezkowe"
     ],
 
     "Śledziona": [
-        "śledzion",
-        "sledzion"
+        "śledzion"
     ],
 
     "Wątroba": [
         "wątrob",
         "watrob"
-    ],
-
-    "Kości": [
-        "kości",
-        "kosc",
-        "kostn",
-        "szpik"
     ],
 
     "Żołądek": [
@@ -53,28 +64,35 @@ LOCATION_RULES = {
         "dno żołądka"
     ],
 
-    "Jelita": [
-        "jelit"
+    "Płuca": [
+        "płuc",
+        "pluc"
+    ],
+
+    "Kości": [
+        "kostn",
+        "kości",
+        "kosc"
+    ],
+
+    "Szpik": [
+        "szpik"
     ],
 
     "Miednica": [
         "miednic"
     ],
 
-    "Pachy": [
-        "pachow"
-    ],
-
-    "Szyja": [
-        "szyjn",
-        "nadobojczyk"
-    ]
+    "Węzły chłonne wnęk": [
+        "wnęki",
+        "wneki"
+]
 }
+
 
 # =====================================
 # DETEKCJA LOKALIZACJI
 # =====================================
-
 def classify_locations(wnioski):
 
     if pd.isna(wnioski):
@@ -89,17 +107,17 @@ def classify_locations(wnioski):
         if any(word in text for word in keywords):
             locations.append(location)
 
-    # brak aktywnej choroby
-    if (
-        "bardzo dobrą odpowiedź" in text
-        or "bardzo dobra odpowiedź" in text
-        or "całkowita odpowiedź" in text
-        or "brak aktywnej choroby" in text
-        or "nie uwidoczniono" in text
-    ):
-        return "Brak aktywnej choroby"
-
     if not locations:
+
+        if (
+            "bardzo dobrą odpowiedź" in text
+            or "bardzo dobra odpowiedź" in text
+            or "całkowita odpowiedź" in text
+            or "brak aktywnej choroby" in text
+            or "nie uwidoczniono" in text
+        ):
+            return "Brak aktywnej choroby"
+
         return "Nieokreślona"
 
     return ", ".join(sorted(set(locations)))
@@ -135,6 +153,7 @@ for file in sorted(PACJENCI_DIR.glob("*.xlsx")):
 
         print(f"Błąd {file.name}: {e}")
 
+
 # =====================================
 # ZAPIS
 # =====================================
@@ -157,3 +176,10 @@ print("=" * 60)
 print(f"Rekordów: {len(result_df)}")
 print(f"Zapisano: {OUTPUT_FILE}")
 print("=" * 60)
+
+for _, row in result_df[
+    result_df["Lokalizacja_zmian"] == "Nieokreślona"
+].head(10).iterrows():
+    print("\n" + "=" * 80)
+    print(row["Pacjent"])
+    print(row["Nr PET"])
