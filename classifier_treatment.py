@@ -54,20 +54,57 @@ def extract_treatment_info(text):
     if any(x in text_lower for x in [
         "ocena zaawansowania",
         "pierwotna ocena",
-        "staging"
+        "staging",
+        "rozpoznanie",
+        "diagnostyka"
     ]):
         stage = "BASELINE"
 
-    elif re.search(r"po\s+\d+\s*(cykl|cyklach|kurs|kursach)", text_lower):
-        stage = "INTERIM"
+
 
     elif any(x in text_lower for x in [
+
+        "ocena remisji",
+
+        "po zakończeniu chth",
+
+        "po zakonczeniu chth",
+
+        "po zakończeniu chemioterapii",
+
+        "po zakonczeniu chemioterapii",
+
         "po zakończeniu leczenia",
-        "po zakonczeniu leczenia",
-        "po leczeniu",
-        "ocena remisji"
+
+        "po zakonczeniu leczenia"
+
     ]):
+
         stage = "END_OF_TREATMENT"
+
+
+
+    elif (
+
+            re.search(
+
+                r"po\s+\d+\s*(cykl|cyklach|kurs|kursach)",
+
+                text_lower
+
+            )
+
+            or any(x in text_lower for x in [
+
+        "ocena odpowiedzi",
+
+        "wczesna ocena odpowiedzi"
+
+    ])
+
+    ):
+
+        stage = "INTERIM"
 
     elif any(x in text_lower for x in [
         "radioterapia",
@@ -88,18 +125,31 @@ def extract_treatment_info(text):
     elif any(x in text_lower for x in [
         "wznowa",
         "nawrót",
-        "nawrot",
-        "progresja"
+        "nawrot"
     ]):
         stage = "RELAPSE"
 
+
     elif any(x in text_lower for x in [
+
         "kontrola",
+
         "badanie kontrolne",
+
         "follow-up",
+
         "follow up",
-        "obserwacja"
+
+        "obserwacja",
+
+        "stan po",
+
+        "leczenie podtrzymujące",
+
+        "w celu wykluczenia wznowy"
+
     ]):
+
         stage = "FOLLOW_UP"
 
     # ==========================
@@ -114,6 +164,11 @@ def extract_treatment_info(text):
             found.append(treatment)
 
     scheme = ", ".join(sorted(set(found)))
+
+    if stage == "OTHER":
+        print("\n" + "=" * 80)
+    print("OTHER")
+    print(text)
 
     return stage, scheme
 # ==========================================
@@ -136,11 +191,17 @@ for file in files:
             continue
 
         patient_name = file.stem
-
         for _, row in df.iterrows():
+
             stage, scheme = extract_treatment_info(
                 row["Problem kliniczny"]
             )
+
+            if (
+                    row["Nr PET"] == 1
+                    and stage == "OTHER"
+            ):
+                stage = "BASELINE"
 
             results.append({
                 "Pacjent": patient_name,

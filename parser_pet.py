@@ -80,9 +80,9 @@ for plik in folder_opisy.glob("*.docx"):
         problem = ""
 
         m = re.search(
-            r"Problem kliniczny:(.*?)(Konsultujący|Głowa i szyja)",
+            r"Problem kliniczny:(.*?)(Głowa i szyja:|Konsultujący)",
             fragment,
-            re.S
+            re.S | re.I
         )
 
         if m:
@@ -125,7 +125,7 @@ for plik in folder_opisy.glob("*.docx"):
         czas_po_fdg = ""
 
         m = re.search(
-            r"po\s*(\d+)\s*min",
+            r"po\s*(\d+)\s*min\s*od\s*podania",
             fragment,
             re.I
         )
@@ -192,13 +192,6 @@ for plik in folder_opisy.glob("*.docx"):
             ]
         )
 
-        if m:
-
-            opis = (
-                m.group(1)
-                .replace("\n", " ")
-                .strip()
-            )
 
         # =====================================
         # WNIOSKI

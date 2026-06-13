@@ -360,8 +360,13 @@ if not patient_info.empty and not patient_pet.empty:
     ostatnia_data = patient_pet["Data badania"].max()
 
     liczba_dni = (
-        ostatnia_data - pierwsza_data
+            ostatnia_data - pierwsza_data
     ).days
+
+    liczba_lat = round(
+        liczba_dni / 365.25,
+        1
+    )
 
     rozpoznanie = patient_pet.iloc[0]["Rozpoznanie"]
     icd10 = patient_pet.iloc[0]["ICD10"]
@@ -473,11 +478,16 @@ if not patient_info.empty and not patient_pet.empty:
         )
 
     with col2:
-        st.metric(
-            "Czas obserwacji",
-            f"{liczba_dni} dni"
-        )
 
+        if liczba_lat < 1:
+            followup = f"{liczba_dni} dni"
+        else:
+            followup = f"{liczba_lat} roku"
+
+        st.metric(
+            "Follow-up",
+            followup
+        )
     # Aktualny status
 
     if ostatnia_odpowiedz == "CR":
@@ -579,33 +589,17 @@ st.dataframe(
             "Nr PET",
             "Data badania",
             "Etap",
+            "Odpowiedź na leczenie",
+            "Lokalizacja_zmian",
             "SUVmax",
             "Glikemia",
-            "Czas FDG [min]",
-            "Odpowiedź na leczenie"
+            "Czas FDG [min]"
         ]
     ],
     width="stretch",
     hide_index=True
 )
-st.subheader("Lokalizacja zmian")
-for _, row in historia_df.iterrows():
 
-    with st.expander(
-        f"PET {row['Nr PET']} | {row['Data badania']}"
-    ):
-
-        st.markdown("### Głowa i szyja")
-        st.write(row["Glowa_i_szyja"])
-
-        st.markdown("### Klatka piersiowa")
-        st.write(row["Klatka_piersiowa"])
-
-        st.markdown("### Brzuch i miednica")
-        st.write(row["Brzuch_i_miednica"])
-
-        st.markdown("### Układ kostny")
-        st.write(row["Uklad_kostny"])
 # =====================================
 # RAPORT KLINICZNY
 # =====================================

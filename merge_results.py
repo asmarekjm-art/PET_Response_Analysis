@@ -25,6 +25,10 @@ PLIK_WYNIK = Path(
     "source/pet_master.xlsx"
 )
 
+PLIK_LOCATIONS = Path(
+    "source/locations.xlsx"
+)
+
 # =====================================
 # WCZYTANIE
 # =====================================
@@ -43,6 +47,10 @@ df_details = pd.read_excel(
 
 df_treatment = pd.read_excel(
     PLIK_LECZENIE
+)
+
+df_locations = pd.read_excel(
+    PLIK_LOCATIONS
 )
 
 # =====================================
@@ -99,6 +107,21 @@ df_master = df_master.merge(
 )
 
 # =====================================
+# LOKALIZACJE
+# =====================================
+
+df_master = df_master.merge(
+
+    df_locations,
+
+    on=[
+        "Pacjent",
+        "Nr PET"
+    ],
+
+    how="left"
+)
+# =====================================
 # KOLEJNOŚĆ KOLUMN
 # =====================================
 
@@ -120,7 +143,7 @@ df_master = df_master[[
     "Glikemia",
     "Czas_po_FDG",
     "SUVmax_global",
-
+    "Lokalizacja_zmian",
     "Problem_kliniczny",
 
     "Glowa_i_szyja",
