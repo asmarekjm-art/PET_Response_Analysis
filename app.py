@@ -135,7 +135,7 @@ pet_df["Data badania"] = pd.to_datetime(
 
 st.header("📊 Statystyki grupy")
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 liczba_pacjentow = patients_df["Pacjent"].nunique()
 
@@ -158,6 +158,24 @@ mezczyzni = len(
     patients_df[
         patients_df["płeć"].str.lower() == "mężczyzna"
     ]
+)
+naj_rozpoznanie = (
+    pet_df["Rozpoznanie"]
+    .value_counts()
+    .idxmax()
+)
+
+last_pet = (
+    pet_df
+    .sort_values("Data badania")
+    .groupby("Pacjent")
+    .tail(1)
+)
+
+naj_odpowiedz = (
+    last_pet["Odpowiedź"]
+    .value_counts()
+    .idxmax()
 )
 
 with col1:
@@ -184,7 +202,63 @@ with col4:
         "Średni wiek",
         sredni_wiek
     )
+with col5:
+    st.metric(
+        "Najczęstsza odpowiedź"
+        " na leczenie",
+        naj_odpowiedz
+    )
+# =====================================
+# Aktualny status pacjentów
+# =====================================
 
+st.divider()
+
+st.subheader("📈 Aktualny status pacjentów")
+
+last_pet = (
+    pet_df
+    .sort_values("Data badania")
+    .groupby("Pacjent")
+    .tail(1)
+)
+
+response_counts = (
+    last_pet["Odpowiedź"]
+    .value_counts(normalize=True)
+    * 100
+).round(1)
+
+cr = response_counts.get("CR", 0)
+pr = response_counts.get("PR", 0)
+sd = response_counts.get("SD", 0)
+pd_resp = response_counts.get("PD", 0)
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric(
+        "CR",
+        f"{cr}%"
+    )
+
+with col2:
+    st.metric(
+        "PR",
+        f"{pr}%"
+    )
+
+with col3:
+    st.metric(
+        "SD",
+        f"{sd}%"
+    )
+
+with col4:
+    st.metric(
+        "PD",
+        f"{pd_resp}%"
+    )
 # =====================================
 # WYKRESY
 # =====================================
@@ -208,23 +282,41 @@ with left:
         "Liczba"
     ]
 
-    fig = px.bar(
-        diag,
-        x="Rozpoznanie",
-        y="Liczba"
+    fig_diag = px.bar(
+        diag.sort_values("Liczba"),
+        x="Liczba",
+        y="Rozpoznanie",
+        orientation="h",
+        text="Liczba"
+    )
+
+    fig_diag.update_traces(
+        textposition="outside"
+    )
+
+    fig_diag.update_layout(
+        height=450,
+        showlegend=False
     )
 
     st.plotly_chart(
-        fig,
+        fig_diag,
         width="stretch"
     )
 
 with right:
 
-    st.subheader("Odpowiedzi")
+    st.subheader("Aktualny status pacjentów")
+
+    last_pet = (
+        pet_df
+        .sort_values("Data badania")
+        .groupby("Pacjent")
+        .tail(1)
+    )
 
     resp = (
-        pet_df["Odpowiedź"]
+        last_pet["Odpowiedź"]
         .value_counts()
         .reset_index()
     )
@@ -234,14 +326,25 @@ with right:
         "Liczba"
     ]
 
-    fig = px.bar(
-        resp,
-        x="Odpowiedź",
-        y="Liczba"
+    fig_resp = px.bar(
+        resp.sort_values("Liczba"),
+        x="Liczba",
+        y="Odpowiedź",
+        orientation="h",
+        text="Liczba"
+    )
+
+    fig_resp.update_traces(
+        textposition="outside"
+    )
+
+    fig_resp.update_layout(
+        height=450,
+        showlegend=False
     )
 
     st.plotly_chart(
-        fig,
+        fig_resp,
         width="stretch"
     )
 
