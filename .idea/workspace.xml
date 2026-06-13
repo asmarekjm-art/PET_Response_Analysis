@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa bledzow w danych pacjenta">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-    </list>
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa wykresow rozpozanie" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -360,11 +357,18 @@
       <option name="project" value="LOCAL" />
       <updated>1781359861263</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="poprawa wykresow rozpozanie">
+      <option name="closed" value="true" />
+      <created>1781361899916</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1781361899917</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="dodanie suv max dla pierwszego i ostatniego badania" />
     <MESSAGE value="Dodano analizę pacjentów i SUVmax w aplikacji Streamlit" />
     <MESSAGE value="generowanie raportu" />
     <MESSAGE value="generowanie podsumowania w excel z .doxc" />
@@ -389,6 +393,7 @@
     <MESSAGE value="dodatkowy classifier do wciagania z opisow lokalizacji zmian o zwiekszonej aktywnosci metabolicznej" />
     <MESSAGE value="popprawa kodu w classifier location" />
     <MESSAGE value="poprawa bledzow w danych pacjenta" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawa bledzow w danych pacjenta" />
+    <MESSAGE value="poprawa wykresow rozpozanie" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawa wykresow rozpozanie" />
   </component>
 </project>

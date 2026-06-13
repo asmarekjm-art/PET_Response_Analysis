@@ -349,37 +349,12 @@ with right:
     )
 
 # =====================================
-# ROZPOZNANIE VS ODPOWIEDŹ
+# ODPOWIEDŹ NA LECZENIE WG ROZPOZNANIA
 # =====================================
 
 st.divider()
 
-st.header("Rozpoznanie vs Odpowiedź")
-
-cross = pd.crosstab(
-    pet_df["Rozpoznanie"],
-    pet_df["Odpowiedź"]
-)
-heatmap = px.imshow(
-    cross,
-    text_auto=True,
-    aspect="auto"
-)
-
-heatmap.update_layout(
-    xaxis_title="Odpowiedź",
-    yaxis_title="Rozpoznanie"
-)
-tab1, tab2, tab3 = st.tabs([
-    "Liczebności",
-    "Procenty",
-    "Heatmapa"
-])
-# liczebności
-cross = pd.crosstab(
-    pet_df["Rozpoznanie"],
-    pet_df["Odpowiedź"]
-)
+st.header("📊 Odpowiedź na leczenie wg rozpoznania")
 
 # procenty w obrębie rozpoznania
 cross_percent = (
@@ -399,23 +374,37 @@ heatmap = px.imshow(
 
 heatmap.update_layout(
     xaxis_title="Odpowiedź",
-    yaxis_title="Rozpoznanie"
+    yaxis_title="Rozpoznanie",
+    height=500
 )
+
+tab1, tab2 = st.tabs([
+    "📋 Procenty",
+    "🔥 Heatmapa"
+])
+
 with tab1:
 
+    st.caption(
+        "Procent odpowiedzi w obrębie każdego rozpoznania"
+    )
+
+    percent_display = (
+        cross_percent
+        .astype(str)
+        .add("%")
+    )
+
     st.dataframe(
-        cross,
+        percent_display,
         width="stretch"
     )
 
 with tab2:
 
-    st.dataframe(
-        cross_percent,
-        width="stretch"
+    st.caption(
+        "Im jaśniejszy kolor, tym częstsza odpowiedź w danym rozpoznaniu"
     )
-
-with tab3:
 
     st.plotly_chart(
         heatmap,
