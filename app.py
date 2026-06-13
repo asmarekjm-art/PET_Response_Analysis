@@ -414,19 +414,29 @@ with tab2:
 # PACJENT
 # =====================================
 
-st.divider()
-
-st.header("👤 Pacjent")
-
-pacjent = st.selectbox(
-    "Wybierz pacjenta",
-    sorted(
-        pet_df["Pacjent"]
-        .dropna()
-        .unique()
-    )
+pacjenci = sorted(
+    pet_df["Pacjent"]
+    .dropna()
+    .unique()
 )
 
+st.divider()
+
+st.markdown("# 👤 Pacjent")
+
+col1, col2 = st.columns([4, 1])
+
+with col1:
+    pacjent = st.selectbox(
+        "",
+        pacjenci
+    )
+
+with col2:
+    st.metric(
+        "Pacjenci",
+        len(pacjenci)
+    )
 # =====================================
 # DANE PACJENTA
 # =====================================
@@ -475,7 +485,7 @@ if not patient_info.empty and not patient_pet.empty:
         "OTHER_B_CELL": "Inny chłoniak B-komórkowy"
     }
 
-    st.subheader("📋 Podsumowanie pacjenta")
+    st.header("📋 Podsumowanie pacjenta")
 
     # Kafelki
 
