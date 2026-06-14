@@ -145,7 +145,7 @@ diagnosis_map = {
 
 st.header("📊 Statystyki grupy")
 
-col1, col2, col3, col4, col5 = st.columns(5)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 liczba_pacjentow = patients_df["Pacjent"].nunique()
 
@@ -188,6 +188,32 @@ naj_odpowiedz = (
     .idxmax()
 )
 
+followup_years = []
+
+for pacjent in pet_df["Pacjent"].unique():
+
+    tmp = pet_df[
+        pet_df["Pacjent"] == pacjent
+    ]
+
+    if len(tmp) < 2:
+        continue
+
+    dni = (
+        tmp["Data badania"].max()
+        -
+        tmp["Data badania"].min()
+    ).days
+
+    followup_years.append(
+        dni / 365.25
+    )
+
+mean_followup = round(
+    sum(followup_years) / len(followup_years),
+    1
+)
+
 with col1:
     st.metric(
         "Pacjenci",
@@ -218,6 +244,12 @@ with col5:
         "Najczęstsza odpowiedź"
         " na leczenie",
         naj_odpowiedz
+    )
+
+with col6:
+    st.metric(
+        "Follow-up",
+        f"{mean_followup} lat"
     )
 # =====================================
 # Aktualny status pacjentów
@@ -269,6 +301,11 @@ with col4:
         "PD",
         f"{pd_resp}%"
     )
+
+
+
+
+
 # =====================================
 # WYKRESY
 # =====================================
@@ -421,7 +458,7 @@ with tab1:
 
     st.dataframe(
         percent_display,
-        use_container_width=True
+        width="stretch"
     )
 
 with tab2:
@@ -447,6 +484,7 @@ pacjenci = sorted(
 st.divider()
 
 st.markdown("# 👤 Pacjent")
+
 
 col1, col2 = st.columns([4, 1])
 
@@ -532,6 +570,11 @@ if not patient_info.empty and not patient_pet.empty:
             "ICD10",
             icd10
         )
+
+
+
+#
+
 
     # =====================================
     # ROZPOZNANIE I LECZENIE
@@ -747,7 +790,7 @@ response_short = {
     "PR": "🔵 PR",
     "SD": "🟡 SD",
     "PD": "🔴 PD",
-    "UNCERTAIN": "⚪ ?"
+    "UNCERTAIN": "⚪ NIEJEDNOZNACZNY"
 }
 
 stage_map = {

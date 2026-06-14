@@ -15,37 +15,42 @@ OUTPUT_FILE = Path("source/locations.xlsx")
 
 LOCATION_RULES = {
 
-    "Węzły chłonne szyjne": [
-        "węzły chłonne szyjne",
-        "węzły szyjne",
+    "Węzły szyjne": [
         "szyjne"
     ],
 
-    "Węzły chłonne pachowe": [
-        "węzły chłonne pachowe",
+    "Węzły nadobojczykowe": [
+        "nadobojczyk"
+    ],
+
+    "Węzły pachowe": [
         "pachowe"
     ],
 
-    "Węzły chłonne śródpiersia": [
-        "śródpiersiu",
-        "śródpiersia",
+    "Węzły śródpiersia": [
+        "śródpiersi",
         "przytchawicze",
-        "okna aortalno-płucnego",
-        "podostrogowe"
+        "podostrogowe",
+        "okna aortalno-płucnego"
     ],
 
-    "Węzły chłonne pachwinowe": [
-        "pachwinowe"
+    "Węzły wnęk": [
+        "wnęki",
+        "wnęk"
     ],
 
-    "Węzły chłonne zaotrzewnowe": [
-        "okołoaortal",
+    "Węzły zaotrzewnowe": [
         "zaotrzewnow",
+        "okołoaortal",
         "przyaortal"
     ],
 
-    "Węzły chłonne krezkowe": [
-        "krezkowe"
+    "Węzły krezkowe": [
+        "krezk"
+    ],
+
+    "Węzły pachwinowe": [
+        "pachwin"
     ],
 
     "Śledziona": [
@@ -59,14 +64,34 @@ LOCATION_RULES = {
 
     "Żołądek": [
         "żołądk",
-        "zoladk",
-        "wpust",
-        "dno żołądka"
+        "zoladk"
+    ],
+
+    "Jelita": [
+        "jelit",
+        "okrężnic",
+        "esica"
+    ],
+
+    "Trzustka": [
+        "trzust"
+    ],
+
+    "Nerki": [
+        "nerk"
+    ],
+
+    "Nadnercza": [
+        "nadnercz"
     ],
 
     "Płuca": [
         "płuc",
         "pluc"
+    ],
+
+    "Opłucna": [
+        "opłucn"
     ],
 
     "Kości": [
@@ -79,14 +104,14 @@ LOCATION_RULES = {
         "szpik"
     ],
 
-    "Miednica": [
-        "miednic"
+    "Tkanki miękkie": [
+        "tkankach miękkich",
+        "tkanki miękkie"
     ],
 
-    "Węzły chłonne wnęk": [
-        "wnęki",
-        "wneki"
-]
+    "Miednica": [
+        "miednic"
+    ]
 }
 
 
@@ -94,6 +119,23 @@ LOCATION_RULES = {
 # DETEKCJA LOKALIZACJI
 # =====================================
 def classify_locations(wnioski):
+    if pd.isna(wnioski):
+        return "Brak danych"
+
+    text = str(wnioski).lower()
+
+    # brak aktywnej choroby
+    if any(
+            x in text
+            for x in [
+                "całkowita odpowiedź",
+                "brak aktywnej choroby",
+                "bardzo dobra odpowiedź",
+                "nie uwidoczniono aktywnych",
+                "bez cech aktywnej choroby"
+            ]
+    ):
+        return "Brak aktywnej choroby"
 
     if pd.isna(wnioski):
         return "Brak danych"
@@ -107,16 +149,6 @@ def classify_locations(wnioski):
         if any(word in text for word in keywords):
             locations.append(location)
 
-    if not locations:
-
-        if (
-            "bardzo dobrą odpowiedź" in text
-            or "bardzo dobra odpowiedź" in text
-            or "całkowita odpowiedź" in text
-            or "brak aktywnej choroby" in text
-            or "nie uwidoczniono" in text
-        ):
-            return "Brak aktywnej choroby"
 
         return "Nieokreślona"
 
@@ -140,12 +172,21 @@ for file in sorted(PACJENCI_DIR.glob("*.xlsx")):
         patient = file.stem
 
         for _, row in df.iterrows():
+            full_text = " ".join([
+
+                str(row.get("Głowa i szyja", "") or ""),
+                str(row.get("Klatka piersiowa", "") or ""),
+                str(row.get("Brzuch i miednica", "") or ""),
+                str(row.get("Układ kostny", "") or ""),
+                str(row.get("Wnioski", "") or "")
+
+            ])
 
             results.append({
                 "Pacjent": patient,
                 "Nr PET": row["Nr PET"],
                 "Lokalizacja_zmian": classify_locations(
-                    row["Wnioski"]
+                    full_text
                 )
             })
 

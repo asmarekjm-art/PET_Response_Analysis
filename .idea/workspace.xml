@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa wizualna zakłądki dane pacjenta">
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa bledów">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier_diagnosis.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_diagnosis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classifier_locations.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_locations.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" afterDir="false" />
@@ -435,11 +435,18 @@
       <option name="project" value="LOCAL" />
       <updated>1781363078917</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="poprawa bledów">
+      <option name="closed" value="true" />
+      <created>1781447064662</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1781447064662</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="generowanie podsumowania w excel z .doxc" />
     <MESSAGE value="poprawiono raport" />
     <MESSAGE value="poprawa wnioskow" />
     <MESSAGE value="nowy parser, podzial opisu na czesci, data rozpoznanie, dane kliniczne , opis i wniosi" />
@@ -464,6 +471,7 @@
     <MESSAGE value="poprawa wykresow rozpozanie" />
     <MESSAGE value="poprawa wykresow odpowiedzi na leczenie na bardziej czytelny" />
     <MESSAGE value="poprawa wizualna zakłądki dane pacjenta" />
-    <option name="LAST_COMMIT_MESSAGE" value="poprawa wizualna zakłądki dane pacjenta" />
+    <MESSAGE value="poprawa bledów" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawa bledów" />
   </component>
 </project>
