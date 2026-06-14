@@ -24,7 +24,17 @@ DIAGNOSIS_MAP = {
         "hodgkina",
         "choroba hodgkina",
         "ziarnica",
-        "ziarniczy"
+        "ziarniczy",
+        "nlphl",
+        "nodular lymphocyte predominant"
+        ]
+    },
+
+    "PMBCL": {
+        "icd10": "C83.3",
+        "keywords": [
+            "primary mediastinal",
+            "chłoniak śródpiersia"
         ]
     },
 
@@ -55,13 +65,7 @@ DIAGNOSIS_MAP = {
         ]
     },
 
-    "MZL": {
-        "icd10": "C85.1",
-        "keywords": [
-            "marginal zone",
-            "marginalny"
-        ]
-    },
+
 
     "MALT": {
         "icd10": "C88.4",
@@ -70,14 +74,13 @@ DIAGNOSIS_MAP = {
         ]
     },
 
-    "PMBCL": {
-        "icd10": "C83.3",
+    "MZL": {
+        "icd10": "C85.1",
         "keywords": [
-            "primary mediastinal",
-            "chłoniak śródpiersia"
+            "marginal zone",
+            "marginalny"
         ]
     },
-
     "PTCL": {
     "icd10": "C84.4",
     "keywords": [
@@ -156,7 +159,9 @@ for plik in FOLDER_PACJENCI.glob("*.xlsx"):
 
             continue
 
-        problem = str(problemy.iloc[0])
+        problem = " ".join(
+            problemy.astype(str)
+        )
 
         rozpoznanie, icd10 = (
             classify_diagnosis(problem)

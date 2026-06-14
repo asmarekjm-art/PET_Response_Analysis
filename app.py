@@ -129,6 +129,16 @@ pet_df["Data badania"] = pd.to_datetime(
     errors="coerce"
 )
 
+diagnosis_map = {
+    "HL": "Chłoniak Hodgkina",
+    "DLBCL": "DLBCL",
+    "FL": "Chłoniak grudkowy",
+    "MCL": "Chłoniak z komórek płaszcza",
+    "PMBCL": "Pierwotny chłoniak śródpiersia",
+    "PTCL": "Obwodowy chłoniak T-komórkowy",
+    "OTHER_B_CELL": "Inny chłoniak B-komórkowy"
+}
+
 # =====================================
 # STATYSTYKI
 # =====================================
@@ -202,6 +212,7 @@ with col4:
         "Średni wiek",
         sredni_wiek
     )
+
 with col5:
     st.metric(
         "Najczęstsza odpowiedź"
@@ -253,7 +264,6 @@ with col3:
         "SD",
         f"{sd}%"
     )
-
 with col4:
     st.metric(
         "PD",
@@ -282,6 +292,10 @@ with left:
         "Liczba"
     ]
 
+    diag["Rozpoznanie"] = diag["Rozpoznanie"].replace({
+        "OTHER_B_CELL": "B-CELL NOS"
+    })
+
     fig_diag = px.bar(
         diag.sort_values("Liczba"),
         x="Liczba",
@@ -296,7 +310,13 @@ with left:
 
     fig_diag.update_layout(
         height=450,
-        showlegend=False
+        showlegend=False,
+        margin=dict(
+            l=50,
+            r=20,
+            t=20,
+            b=20
+        )
     )
 
     st.plotly_chart(
@@ -356,7 +376,6 @@ st.divider()
 
 st.header("📊 Odpowiedź na leczenie wg rozpoznania")
 
-# procenty w obrębie rozpoznania
 cross_percent = (
     pd.crosstab(
         pet_df["Rozpoznanie"],
@@ -365,7 +384,12 @@ cross_percent = (
     ) * 100
 ).round(1)
 
-# heatmapa procentowa
+# zamiana skrótów na pełne nazwy
+cross_percent.index = [
+    diagnosis_map.get(x, x)
+    for x in cross_percent.index
+]
+
 heatmap = px.imshow(
     cross_percent,
     text_auto=True,
@@ -397,7 +421,7 @@ with tab1:
 
     st.dataframe(
         percent_display,
-        width="stretch"
+        use_container_width=True
     )
 
 with tab2:
@@ -428,8 +452,9 @@ col1, col2 = st.columns([4, 1])
 
 with col1:
     pacjent = st.selectbox(
-        "",
-        pacjenci
+        "Pacjent",
+        pacjenci,
+        label_visibility="collapsed"
     )
 
 with col2:
@@ -437,6 +462,7 @@ with col2:
         "Pacjenci",
         len(pacjenci)
     )
+
 # =====================================
 # DANE PACJENTA
 # =====================================
@@ -475,15 +501,7 @@ if not patient_info.empty and not patient_pet.empty:
 
     ostatnia_odpowiedz = patient_pet.iloc[-1]["Odpowiedź"]
 
-    diagnosis_map = {
-        "HL": "Chłoniak Hodgkina",
-        "DLBCL": "Rozlany chłoniak z dużych komórek B",
-        "FL": "Chłoniak grudkowy",
-        "MCL": "Chłoniak z komórek płaszcza",
-        "PMBCL": "Pierwotny chłoniak śródpiersia z dużych komórek B",
-        "PTCL": "Obwodowy chłoniak T-komórkowy",
-        "OTHER_B_CELL": "Inny chłoniak B-komórkowy"
-    }
+
 
     st.header("📋 Podsumowanie pacjenta")
 
@@ -515,22 +533,100 @@ if not patient_info.empty and not patient_pet.empty:
             icd10
         )
 
-    # Rozpoznanie
+    # =====================================
+    # ROZPOZNANIE I LECZENIE
+    # =====================================
 
-    st.info(
-        f"Rozpoznanie: {diagnosis_map.get(rozpoznanie, rozpoznanie)} ({icd10})"
-    )
-    #rodzaj leczenia
+    leczenie = ""
+
     if "Leczenie" in patient_row.index:
-
         leczenie = str(
             patient_row["Leczenie"]
         ).strip()
 
-        if leczenie and leczenie.lower() != "nan":
-            st.info(
-                f"💊 Leczenie: {leczenie}"
-            )
+    # Kolory rozpoznań
+
+    diagnosis_colors = {
+        "HL": "#00B894",
+        "DLBCL": "#E74C3C",
+        "FL": "#3498DB",
+        "MCL": "#9B59B6",
+        "PMBCL": "#F39C12",
+        "PTCL": "#E91E63",
+        "OTHER_B_CELL": "#95A5A6"
+    }
+
+    diag_color = diagnosis_colors.get(
+        rozpoznanie,
+        "#4DA3FF"
+    )
+
+    # Kolory leczenia
+
+    treatment_colors = {
+        "ABVD": "#00B894",
+        "BEACOPP": "#E74C3C",
+        "R-CHOP": "#3498DB",
+        "R-DHAP": "#9B59B6",
+        "R-ICE": "#F39C12",
+        "ASCT": "#E91E63"
+    }
+
+    leczenie_color = "#4DA3FF"
+
+    for treatment, color in treatment_colors.items():
+
+        if treatment in leczenie.upper():
+            leczenie_color = color
+            break
+
+
+    # Kafle
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        diagnosis_name = diagnosis_map.get(
+            rozpoznanie,
+            rozpoznanie
+        )
+
+        st.markdown(
+            f"""
+    <div style="
+    background-color:#16324F;
+    padding:15px;
+    border-radius:10px;
+    border-left:5px solid {diag_color};
+    margin-bottom:10px;
+    color:white;
+    ">
+    <b>Rozpoznanie</b><br><br>
+    {diagnosis_name}
+    </div>
+    """,
+            unsafe_allow_html=True
+        )
+
+    with col2:
+
+        st.markdown(
+            f"""
+    <div style="
+    background-color:#16324F;
+    padding:15px;
+    border-radius:10px;
+    border-left:5px solid {leczenie_color};
+    margin-bottom:10px;
+    color:white;
+    ">
+    <b>Leczenie</b><br><br>
+    {leczenie}
+    </div>
+    """,
+            unsafe_allow_html=True
+        )
 
     # Parametry PET
 
@@ -590,32 +686,49 @@ if not patient_info.empty and not patient_pet.empty:
             "Follow-up",
             followup
         )
+
+
     # Aktualny status
 
-    if ostatnia_odpowiedz == "CR":
-        st.success(
-            "Aktualny status: całkowita odpowiedź metaboliczna"
-        )
+    status_labels = {
+        "CR": "Całkowita odpowiedź metaboliczna",
+        "PR": "Częściowa odpowiedź metaboliczna",
+        "SD": "Stabilizacja choroby",
+        "PD": "Progresja choroby",
+        "UNCERTAIN": "Wynik niejednoznaczny"
+    }
 
-    elif ostatnia_odpowiedz == "PR":
-        st.info(
-            "Aktualny status: częściowa odpowiedź metaboliczna"
-        )
+    status_colors = {
+        "CR": "#198754",
+        "PR": "#0dcaf0",
+        "SD": "#ffc107",
+        "PD": "#dc3545",
+        "UNCERTAIN": "#6c757d"
+    }
 
-    elif ostatnia_odpowiedz == "SD":
-        st.warning(
-            "Aktualny status: stabilizacja choroby"
-        )
+    status = ostatnia_odpowiedz or "UNCERTAIN"
 
-    elif ostatnia_odpowiedz == "PD":
-        st.error(
-            "Aktualny status: progresja choroby"
-        )
-
-    else:
-        st.warning(
-            "Aktualny status: wynik niejednoznaczny"
-        )
+    st.markdown(
+        f"""
+        <div style="
+            background-color:#16324F;
+            padding:15px;
+            border-radius:10px;
+            border-left:5px solid {status_colors.get(status, '#6c757d')};
+            margin-bottom:10px;">
+            <div style="font-size:14px;color:#B8D4F0;">
+                Aktualny status
+            </div>
+            <div style="font-size:20px;font-weight:bold;">
+                {status}
+            </div>
+            <div style="font-size:14px;">
+                {status_labels.get(status, status)}
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 # =====================================
 # HISTORIA PET
