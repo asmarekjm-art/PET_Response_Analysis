@@ -836,6 +836,8 @@ historia_df["Data badania"] = (
 )
 historia_df = historia_df.rename(
     columns={
+        "Deauville_AI": "Skala Deauville",
+        "Lugano_AI": "Klasyfikacja Lugano",
         "SUVmax_global": "SUVmax",
         "Czas_po_FDG": "Czas FDG [min]"
     }
@@ -850,8 +852,8 @@ st.dataframe(
             "Data badania",
             "Etap",
             "Odpowiedź na leczenie",
-            "Deauville_AI",
-            "Lugano_AI",
+            "Skala Deauville",
+            "Klasyfikacja Lugano",
             "Lokalizacja_zmian",
             "SUVmax",
             "Glikemia",
@@ -861,7 +863,47 @@ st.dataframe(
     width="stretch",
     hide_index=True
 )
+# legenta
+with st.expander("📖 Interpretacja skali Deauville i Lugano"):
 
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.caption("Skala Deauville")
+
+        st.dataframe(
+            pd.DataFrame({
+                "Skala": ["DS1", "DS2", "DS3", "DS4", "DS5"],
+                "Znaczenie": [
+                    "Brak wychwytu",
+                    "≤ śródpiersie",
+                    "> śródpiersie",
+                    "> wątroba",
+                    "Nowe zmiany"
+                ]
+            }),
+            hide_index=True,
+            width="stretch"
+        )
+
+    with col2:
+
+        st.caption("Klasyfikacja Lugano")
+
+        st.dataframe(
+            pd.DataFrame({
+                "Skrót": ["CMR", "PMR", "SMD", "PMD"],
+                "Znaczenie": [
+                    "Całkowita odpowiedź",
+                    "Częściowa odpowiedź",
+                    "Stabilizacja",
+                    "Progresja"
+                ]
+            }),
+            hide_index=True,
+            width="stretch"
+        )
 # =====================================
 # RAPORT KLINICZNY
 # =====================================
