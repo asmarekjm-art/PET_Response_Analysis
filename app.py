@@ -840,6 +840,8 @@ historia_df = historia_df.rename(
         "Czas_po_FDG": "Czas FDG [min]"
     }
 )
+
+
 # tabela
 st.dataframe(
     historia_df[
@@ -848,6 +850,8 @@ st.dataframe(
             "Data badania",
             "Etap",
             "Odpowiedź na leczenie",
+            "Deauville_AI",
+            "Lugano_AI",
             "Lokalizacja_zmian",
             "SUVmax",
             "Glikemia",

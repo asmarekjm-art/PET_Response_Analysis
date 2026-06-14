@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa bledów">
+      <change afterPath="$PROJECT_DIR$/classifier_skala.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier_locations.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_locations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merge_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/merge_results.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" afterDir="false" />
@@ -94,31 +95,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.app_v2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.classifier_details.executor&quot;: &quot;Run&quot;,
-    &quot;Python.classifier_diagnosis.executor&quot;: &quot;Run&quot;,
-    &quot;Python.classifier_lesions.executor&quot;: &quot;Run&quot;,
-    &quot;Python.classifier_locations.executor&quot;: &quot;Run&quot;,
-    &quot;Python.classifier_response.executor&quot;: &quot;Run&quot;,
-    &quot;Python.classifier_teratment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.merge_results.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parser_docx.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parser_pet.executor&quot;: &quot;Run&quot;,
-    &quot;Python.run_pipeline.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.app.executor": "Run",
+    "Python.app_v2.executor": "Run",
+    "Python.classifier_details.executor": "Run",
+    "Python.classifier_diagnosis.executor": "Run",
+    "Python.classifier_lesions.executor": "Run",
+    "Python.classifier_locations.executor": "Run",
+    "Python.classifier_response.executor": "Run",
+    "Python.classifier_skala.executor": "Run",
+    "Python.classifier_teratment.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.merge_results.executor": "Run",
+    "Python.parser_docx.executor": "Run",
+    "Python.parser_pet.executor": "Run",
+    "Python.run_pipeline.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\asmar\PET_Response_Analysis" />
@@ -443,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781447064662</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="poprawa bledów">
+      <option name="closed" value="true" />
+      <created>1781450108641</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1781450108642</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

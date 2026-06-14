@@ -121,6 +121,26 @@ df_master = df_master.merge(
 
     how="left"
 )
+
+# =====================================
+# DEAUVILLE / LUGANO
+# =====================================
+
+deauville_df = pd.read_excel(
+    "source/deauville_lugano.xlsx"
+)
+
+df_master = df_master.merge(
+
+    deauville_df,
+
+    on=[
+        "Pacjent",
+        "Nr PET"
+    ],
+
+    how="left"
+)
 # =====================================
 # KOLEJNOŚĆ KOLUMN
 # =====================================
@@ -139,7 +159,8 @@ df_master = df_master[[
     "Schemat",
 
     "Odpowiedź",
-
+    "Deauville_AI",
+    "Lugano_AI",
     "Glikemia",
     "Czas_po_FDG",
     "SUVmax_global",
