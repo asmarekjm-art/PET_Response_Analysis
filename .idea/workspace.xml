@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="dodanie skali deaville i lugano">
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="poprawa wizualna">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser_docx.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,11 +412,18 @@
       <option name="project" value="LOCAL" />
       <updated>1781451304262</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="poprawa wizualna">
+      <option name="closed" value="true" />
+      <created>1781452378113</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1781452378113</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="poprawa wnioskow" />
     <MESSAGE value="nowy parser, podzial opisu na czesci, data rozpoznanie, dane kliniczne , opis i wniosi" />
     <MESSAGE value="stworzenie analizy rozpoznania pacjentow i stworzenie bazy danyc z zozpoznaniem i klasyfikacja iCD10" />
     <MESSAGE value="stworzenie classifier do podzialu odpowiedzi na lecznie na pd, pr, sd i cr" />
@@ -438,6 +448,7 @@
     <MESSAGE value="poprawa wizualna zakłądki dane pacjenta" />
     <MESSAGE value="poprawa bledów" />
     <MESSAGE value="dodanie skali deaville i lugano" />
-    <option name="LAST_COMMIT_MESSAGE" value="dodanie skali deaville i lugano" />
+    <MESSAGE value="poprawa wizualna" />
+    <option name="LAST_COMMIT_MESSAGE" value="poprawa wizualna" />
   </component>
 </project>
