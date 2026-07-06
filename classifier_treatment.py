@@ -165,8 +165,8 @@ def extract_treatment_info(text):
 
     scheme = ", ".join(sorted(set(found)))
 
-    if stage == "OTHER":
-        print("\n" + "=" * 80)
+    iif stage == "OTHER":
+    print("\n" + "=" * 80)
     print("OTHER")
     print(text)
 
@@ -179,18 +179,22 @@ results = []
 
 files = list(PACJENCI_DIR.glob("*.xlsx"))
 
-for file in files:
+for plik in files:
 
     try:
 
-        df = pd.read_excel(file)
+        df = pd.read_excel(plik)
 
-        required = ["Nr PET", "Problem kliniczny"]
+        required = [
+            "Nr PET",
+            "Problem kliniczny"
+        ]
 
         if not all(col in df.columns for col in required):
             continue
 
-        patient_name = file.stem
+        patient_name = plik.stem
+
         for _, row in df.iterrows():
 
             stage, scheme = extract_treatment_info(
@@ -212,7 +216,7 @@ for file in files:
             })
 
     except Exception as e:
-        print(f"Błąd: {file.name} -> {e}")
+        print(f"Błąd: {plik.name} -> {e}")
 
 # ==========================================
 # ZAPIS

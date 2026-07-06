@@ -118,29 +118,25 @@ LOCATION_RULES = {
 # =====================================
 # DETEKCJA LOKALIZACJI
 # =====================================
+
 def classify_locations(wnioski):
+
     if pd.isna(wnioski):
         return "Brak danych"
 
     text = str(wnioski).lower()
 
-    # brak aktywnej choroby
     if any(
-            x in text
-            for x in [
-                "całkowita odpowiedź",
-                "brak aktywnej choroby",
-                "bardzo dobra odpowiedź",
-                "nie uwidoczniono aktywnych",
-                "bez cech aktywnej choroby"
-            ]
+        x in text
+        for x in [
+            "całkowita odpowiedź",
+            "brak aktywnej choroby",
+            "bardzo dobra odpowiedź",
+            "nie uwidoczniono aktywnych",
+            "bez cech aktywnej choroby"
+        ]
     ):
         return "Brak aktywnej choroby"
-
-    if pd.isna(wnioski):
-        return "Brak danych"
-
-    text = str(wnioski).lower()
 
     locations = []
 
@@ -149,27 +145,27 @@ def classify_locations(wnioski):
         if any(word in text for word in keywords):
             locations.append(location)
 
-
+    if not locations:
         return "Nieokreślona"
 
     return ", ".join(sorted(set(locations)))
 
 # =====================================
-# GŁÓWNA PĘTLA
+# PRZETWARZANIE PACJENTÓW
 # =====================================
 
 results = []
 
-for file in sorted(PACJENCI_DIR.glob("*.xlsx")):
+for plik in sorted(PACJENCI_DIR.glob("*.xlsx")):
 
     try:
 
-        df = pd.read_excel(file)
+        df = pd.read_excel(plik)
 
         if "Wnioski" not in df.columns:
             continue
 
-        patient = file.stem
+        pacjent = plik.stem
 
         for _, row in df.iterrows():
             full_text = " ".join([
@@ -183,7 +179,7 @@ for file in sorted(PACJENCI_DIR.glob("*.xlsx")):
             ])
 
             results.append({
-                "Pacjent": patient,
+                "Pacjent": pacjent,
                 "Nr PET": row["Nr PET"],
                 "Lokalizacja_zmian": classify_locations(
                     full_text
@@ -192,7 +188,7 @@ for file in sorted(PACJENCI_DIR.glob("*.xlsx")):
 
     except Exception as e:
 
-        print(f"Błąd {file.name}: {e}")
+        print(f"Błąd {plik.name}: {e}")
 
 
 # =====================================
