@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Poprawa komunikatów pipeline">
-      <change beforePath="$PROJECT_DIR$/parser_pet.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser_pet.py" afterDir="false" />
-    </list>
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Uporządkowanie kodu parsera PET" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -432,11 +430,18 @@
       <option name="project" value="LOCAL" />
       <updated>1783351342199</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Uporządkowanie kodu parsera PET">
+      <option name="closed" value="true" />
+      <created>1783351956391</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1783351956391</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="stworzenie classifier do podzialu odpowiedzi na lecznie na pd, pr, sd i cr" />
     <MESSAGE value="polaczenie stworzonych plikow excel" />
     <MESSAGE value="nowy streamlit" />
     <MESSAGE value="poprawione informacje o pacjencie, przebiegu leczenia" />
@@ -461,6 +466,7 @@
     <MESSAGE value="poprawa wizualna" />
     <MESSAGE value="przatanie kodu" />
     <MESSAGE value="Poprawa komunikatów pipeline" />
-    <option name="LAST_COMMIT_MESSAGE" value="Poprawa komunikatów pipeline" />
+    <MESSAGE value="Uporządkowanie kodu parsera PET" />
+    <option name="LAST_COMMIT_MESSAGE" value="Uporządkowanie kodu parsera PET" />
   </component>
 </project>

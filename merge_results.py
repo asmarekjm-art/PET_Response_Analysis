@@ -29,6 +29,9 @@ PLIK_LOCATIONS = Path(
     "source/locations.xlsx"
 )
 
+PLIK_DEAUVILLE = Path(
+    "source/deauville_lugano.xlsx"
+)
 # =====================================
 # WCZYTANIE
 # =====================================
@@ -126,21 +129,20 @@ df_master = df_master.merge(
 # DEAUVILLE / LUGANO
 # =====================================
 
-deauville_df = pd.read_excel(
-    "source/deauville_lugano.xlsx"
+
+df_deauville = pd.read_excel(
+    PLIK_DEAUVILLE
 )
 
 df_master = df_master.merge(
-
-    deauville_df,
-
+    df_deauville,
     on=[
         "Pacjent",
         "Nr PET"
     ],
-
     how="left"
 )
+
 # =====================================
 # KOLEJNOŚĆ KOLUMN
 # =====================================
