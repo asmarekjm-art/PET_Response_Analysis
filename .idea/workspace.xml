@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="przatanie kodu">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_pipeline.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_pipeline.py" afterDir="false" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Poprawa komunikatów pipeline">
+      <change beforePath="$PROJECT_DIR$/parser_pet.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser_pet.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -425,11 +424,18 @@
       <option name="project" value="LOCAL" />
       <updated>1782239431476</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Poprawa komunikatów pipeline">
+      <option name="closed" value="true" />
+      <created>1783351342199</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1783351342199</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="stworzenie analizy rozpoznania pacjentow i stworzenie bazy danyc z zozpoznaniem i klasyfikacja iCD10" />
     <MESSAGE value="stworzenie classifier do podzialu odpowiedzi na lecznie na pd, pr, sd i cr" />
     <MESSAGE value="polaczenie stworzonych plikow excel" />
     <MESSAGE value="nowy streamlit" />
@@ -454,6 +460,7 @@
     <MESSAGE value="dodanie skali deaville i lugano" />
     <MESSAGE value="poprawa wizualna" />
     <MESSAGE value="przatanie kodu" />
-    <option name="LAST_COMMIT_MESSAGE" value="przatanie kodu" />
+    <MESSAGE value="Poprawa komunikatów pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="Poprawa komunikatów pipeline" />
   </component>
 </project>

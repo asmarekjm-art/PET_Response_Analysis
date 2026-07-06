@@ -12,6 +12,32 @@ folder_wynik = Path("pacjenci")
 
 folder_wynik.mkdir(exist_ok=True)
 
+
+# =====================================
+# WYODRĘBNIANIE SEKCJI
+# =====================================
+def extract_section(text, start, ends):
+    pattern = (
+            start +
+            r"(.*?)" +
+            "(" + "|".join(ends) + ")"
+    )
+
+    m = re.search(
+        pattern,
+        text,
+        re.S | re.I
+    )
+
+    if m:
+        return (
+            m.group(1)
+            .replace("\n", " ")
+            .strip()
+        )
+
+    return ""
+
 # =====================================
 # PRZETWARZANIE PLIKÓW
 # =====================================
@@ -132,31 +158,7 @@ for plik in folder_opisy.glob("*.docx"):
 
         if m:
             czas_po_fdg = m.group(1)
-        # =====================================
-        # OPIS BADANIA
-        # =====================================
-        def extract_section(text, start, ends):
 
-            pattern = (
-                    start +
-                    r"(.*?)" +
-                    "(" + "|".join(ends) + ")"
-            )
-
-            m = re.search(
-                pattern,
-                text,
-                re.S | re.I
-            )
-
-            if m:
-                return (
-                    m.group(1)
-                    .replace("\n", " ")
-                    .strip()
-                )
-
-            return ""
 
 
         glowa_szyja = extract_section(
@@ -232,9 +234,7 @@ for plik in folder_opisy.glob("*.docx"):
 
         suvmax = max(suvy) if suvy else None
 
-        print("\n" + "=" * 80)
-        print(plik.name)
-        print(sorted(suvy, reverse=True)[:20])
+
         # =====================================
         # ZAPIS BADANIA
         # =====================================
