@@ -6,8 +6,14 @@ import pandas as pd
 # =====================================
 
 FOLDER_PACJENCI = Path("pacjenci")
-PLIK_WYNIK = Path("source/rozpoznania_pacjentow.xlsx")
 
+PLIK_WYNIK = Path(
+    "source/rozpoznania_pacjentow.xlsx"
+)
+
+PLIK_UNKNOWN = Path(
+    "source/unknown_diagnosis.xlsx"
+)
 # =====================================
 # SŁOWNIK ROZPOZNAŃ
 # =====================================
@@ -134,6 +140,7 @@ def classify_diagnosis(problem):
 
 wyniki = []
 unknown = []
+
 for plik in FOLDER_PACJENCI.glob("*.xlsx"):
 
     print(f"Przetwarzam: {plik.name}")
@@ -198,9 +205,11 @@ df_wyniki.to_excel(
     PLIK_WYNIK,
     index=False
 )
+
 pd.DataFrame(unknown).to_excel(
-    "source/unknown_diagnosis.xlsx",
+    PLIK_UNKNOWN,
     index=False
 )
+
 print("\nZapisano:")
 print(PLIK_WYNIK)

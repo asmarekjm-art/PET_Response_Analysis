@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Uporządkowanie merge_results">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier_response.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_response.py" afterDir="false" />
-    </list>
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Uporządkowanie classifier_response" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -449,11 +446,18 @@
       <option name="project" value="LOCAL" />
       <updated>1783352530554</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Uporządkowanie classifier_response">
+      <option name="closed" value="true" />
+      <created>1783353867353</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1783353867353</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="nowy streamlit" />
     <MESSAGE value="poprawione informacje o pacjencie, przebiegu leczenia" />
     <MESSAGE value="popawan czesci o pacjencie i informacjach o pet/ct" />
     <MESSAGE value="utworzenie pliku classifer details do wyciagniecia informacji z opisow o glikeni, czasie po jakim wykonano badanie, inf szczegolowych o wyniku badania( glowa, klp, brzuch miednica, kosci)" />
@@ -478,6 +482,7 @@
     <MESSAGE value="Poprawa komunikatów pipeline" />
     <MESSAGE value="Uporządkowanie kodu parsera PET" />
     <MESSAGE value="Uporządkowanie merge_results" />
-    <option name="LAST_COMMIT_MESSAGE" value="Uporządkowanie merge_results" />
+    <MESSAGE value="Uporządkowanie classifier_response" />
+    <option name="LAST_COMMIT_MESSAGE" value="Uporządkowanie classifier_response" />
   </component>
 </project>
