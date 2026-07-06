@@ -30,17 +30,17 @@ REQUIRED_COLUMNS = [
 
 results = []
 
-files = sorted(PACJENCI_DIR.glob("*.xlsx"))
+pliki = sorted(PACJENCI_DIR.glob("*.xlsx"))
 
-print(f"\nZnaleziono {len(files)} plików pacjentów\n")
+print(f"\nZnaleziono {len(pliki)} plików pacjentów\n")
 
-for file in files:
+for plik in pliki:
 
     try:
 
-        df = pd.read_excel(file)
+        df = pd.read_excel(plik)
 
-        patient_name = file.stem
+        pacjent = plik.stem
 
         missing = [
             col for col in REQUIRED_COLUMNS
@@ -49,14 +49,14 @@ for file in files:
 
         if missing:
             print(
-                f"Pominięto {file.name} - brak kolumn: {missing}"
+                f"Pominięto {plik.name} - brak kolumn: {missing}"
             )
             continue
 
         for _, row in df.iterrows():
 
             results.append({
-                "Pacjent": patient_name,
+                "Pacjent": pacjent,
                 "Nr PET": row.get("Nr PET"),
                 "Problem_kliniczny": row.get("Problem kliniczny"),
                 "Glikemia": row.get("Glikemia"),
@@ -71,7 +71,7 @@ for file in files:
     except Exception as e:
 
         print(
-            f"Błąd podczas przetwarzania {file.name}: {e}"
+            f"Błąd podczas przetwarzania {plik.name}: {e}"
         )
 
 # ==========================================
