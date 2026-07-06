@@ -165,10 +165,10 @@ def extract_treatment_info(text):
 
     scheme = ", ".join(sorted(set(found)))
 
-    iif stage == "OTHER":
-    print("\n" + "=" * 80)
-    print("OTHER")
-    print(text)
+    if stage == "OTHER":
+        print("\n" + "=" * 80)
+        print("OTHER")
+        print(text)
 
     return stage, scheme
 # ==========================================
@@ -177,9 +177,9 @@ def extract_treatment_info(text):
 
 results = []
 
-files = list(PACJENCI_DIR.glob("*.xlsx"))
+pliki = list(PACJENCI_DIR.glob("*.xlsx"))
 
-for plik in files:
+for plik in pliki:
 
     try:
 
@@ -193,7 +193,7 @@ for plik in files:
         if not all(col in df.columns for col in required):
             continue
 
-        patient_name = plik.stem
+        pacjent = plik.stem
 
         for _, row in df.iterrows():
 
@@ -208,7 +208,7 @@ for plik in files:
                 stage = "BASELINE"
 
             results.append({
-                "Pacjent": patient_name,
+                "Pacjent": pacjent,
                 "Nr PET": row["Nr PET"],
                 "Problem kliniczny": row["Problem kliniczny"],
                 "Etap_leczenia": stage,

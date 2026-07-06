@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Poprawa czytelności classifier_skala">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classifier_locations.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_locations.py" afterDir="false" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Naprawa klasyfikacji leczenia">
       <change beforePath="$PROJECT_DIR$/classifier_treatment.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_treatment.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -474,11 +472,18 @@
       <option name="project" value="LOCAL" />
       <updated>1783360366630</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Naprawa klasyfikacji leczenia">
+      <option name="closed" value="true" />
+      <created>1783362743611</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1783362743612</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="utworzenie pliku classifer details do wyciagniecia informacji z opisow o glikeni, czasie po jakim wykonano badanie, inf szczegolowych o wyniku badania( glowa, klp, brzuch miednica, kosci)" />
     <MESSAGE value="utworzenie pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
     <MESSAGE value="upoprawa pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
     <MESSAGE value="poprawainformacji o pacjencie bardziej szczegolowe raporty pet" />
@@ -503,6 +508,7 @@
     <MESSAGE value="Uporządkowanie classifier_response" />
     <MESSAGE value="Poprawa czytelności classifier_diagnosis" />
     <MESSAGE value="Poprawa czytelności classifier_skala" />
-    <option name="LAST_COMMIT_MESSAGE" value="Poprawa czytelności classifier_skala" />
+    <MESSAGE value="Naprawa klasyfikacji leczenia" />
+    <option name="LAST_COMMIT_MESSAGE" value="Naprawa klasyfikacji leczenia" />
   </component>
 </project>
