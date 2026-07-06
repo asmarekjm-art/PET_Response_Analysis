@@ -11,7 +11,14 @@ PLIK_WYNIK = Path(
     "source/wnioski_pet.xlsx"
 )
 
-#wnioski
+PLIK_UNCERTAIN = Path(
+    "source/uncertain_response.xlsx"
+)
+
+# =====================================
+# KLASYFIKACJA ODPOWIEDZI
+# =====================================
+
 def classify_response(wnioski):
 
     if pd.isna(wnioski):
@@ -306,9 +313,10 @@ pd.DataFrame(wyniki).to_excel(
 )
 
 pd.DataFrame(unknown).to_excel(
-    "source/uncertain_response.xlsx",
+    PLIK_UNCERTAIN,
     index=False
 )
+
 print("\nPodsumowanie:")
 
 print(
