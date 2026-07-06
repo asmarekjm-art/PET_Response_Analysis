@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Uporządkowanie classifier_response" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Poprawa czytelności classifier_diagnosis">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -454,11 +456,18 @@
       <option name="project" value="LOCAL" />
       <updated>1783353867353</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="Poprawa czytelności classifier_diagnosis">
+      <option name="closed" value="true" />
+      <created>1783358515626</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1783358515626</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="poprawione informacje o pacjencie, przebiegu leczenia" />
     <MESSAGE value="popawan czesci o pacjencie i informacjach o pet/ct" />
     <MESSAGE value="utworzenie pliku classifer details do wyciagniecia informacji z opisow o glikeni, czasie po jakim wykonano badanie, inf szczegolowych o wyniku badania( glowa, klp, brzuch miednica, kosci)" />
     <MESSAGE value="utworzenie pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
@@ -483,6 +492,7 @@
     <MESSAGE value="Uporządkowanie kodu parsera PET" />
     <MESSAGE value="Uporządkowanie merge_results" />
     <MESSAGE value="Uporządkowanie classifier_response" />
-    <option name="LAST_COMMIT_MESSAGE" value="Uporządkowanie classifier_response" />
+    <MESSAGE value="Poprawa czytelności classifier_diagnosis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Poprawa czytelności classifier_diagnosis" />
   </component>
 </project>

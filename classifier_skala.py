@@ -1,11 +1,23 @@
 from pathlib import Path
 import pandas as pd
 
-INPUT_FILE = Path("source/wnioski_pet.xlsx")
-OUTPUT_FILE = Path("source/deauville_lugano.xlsx")
+# =====================================
+# KONFIGURACJA
+# =====================================
 
+INPUT_FILE = Path(
+    "source/wnioski_pet.xlsx"
+)
 
-def classify(response):
+OUTPUT_FILE = Path(
+    "source/deauville_lugano.xlsx"
+)
+
+# =====================================
+# KLASYFIKACJA DEAUVILLE / LUGANO
+# =====================================
+
+def classify_deauville(response):
 
     response = str(response).upper().strip()
 
@@ -23,14 +35,21 @@ def classify(response):
 
     return "?", "?"
 
+# =====================================
+# WCZYTANIE DANYCH
+# =====================================
 
 df = pd.read_excel(INPUT_FILE)
+
+# =====================================
+# KLASYFIKACJA
+# =====================================
 
 results = []
 
 for _, row in df.iterrows():
 
-    ds, lugano = classify(
+    ds, lugano = classify_deauville(
         row["Odpowiedź"]
     )
 
@@ -44,6 +63,10 @@ for _, row in df.iterrows():
     })
 
 result_df = pd.DataFrame(results)
+
+# =====================================
+# ZAPIS
+# =====================================
 
 result_df.to_excel(
     OUTPUT_FILE,
