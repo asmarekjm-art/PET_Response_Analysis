@@ -1,4 +1,3 @@
-from pathlib import Path
 import subprocess
 import sys
 
@@ -11,6 +10,8 @@ scripts = [
     "merge_results.py"
 ]
 
+success = True
+
 for script in scripts:
 
     print()
@@ -18,15 +19,19 @@ for script in scripts:
     print(f"Uruchamianie: {script}")
     print("=" * 70)
 
-    result = subprocess.run(
-        [sys.executable, script]
-    )
+    result = subprocess.run([sys.executable, script])
 
     if result.returncode != 0:
+        success = False
         print(f"\nBŁĄD W: {script}")
         break
 
 print()
 print("=" * 70)
-print("PIPELINE ZAKOŃCZONY")
+
+if success:
+    print("PIPELINE ZAKOŃCZONY POMYŚLNIE")
+else:
+    print("PIPELINE PRZERWANY Z POWODU BŁĘDU")
+
 print("=" * 70)
