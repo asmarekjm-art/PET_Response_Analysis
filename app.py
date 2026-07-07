@@ -188,6 +188,12 @@ naj_odpowiedz = (
     .idxmax()
 )
 
+naj_rozpoznanie = (
+    pet_df["Rozpoznanie"]
+    .value_counts()
+    .idxmax()
+)
+
 followup_years = []
 
 for pacjent in pet_df["Pacjent"].unique():
@@ -214,43 +220,62 @@ mean_followup = round(
     1
 )
 
+# ---------- Pierwszy rząd ----------
+
+col1, col2, col3, col4 = st.columns(4)
+
 with col1:
     st.metric(
         "Pacjenci",
         liczba_pacjentow
     )
 
-
 with col2:
     st.metric(
-        "Badania PET",
+        "Badania PET/CT",
         liczba_pet
     )
 
 with col3:
     st.metric(
-        "Kobiety / Mężczyźni",
-        f"{kobiety}/{mezczyzni}"
+        "Kobiety",
+        kobiety
     )
 
 with col4:
+    st.metric(
+        "Ilężczyźni",
+        mezczyzni
+    )
+
+# ---------- Drugi rząd ----------
+
+col5, col6, col7, col8 = st.columns(4)
+
+with col5:
     st.metric(
         "Średni wiek",
         sredni_wiek
     )
 
-with col5:
+with col6:
     st.metric(
-        "Najczęstsza odpowiedź"
-        " na leczenie",
+        "Najczęstsze\nrozpoznanie",
+        naj_rozpoznanie
+    )
+
+with col7:
+    st.metric(
+        "Dominująca\nodpowiedź",
         naj_odpowiedz
     )
 
-with col6:
+with col8:
     st.metric(
-        "Follow-up",
-        f"{mean_followup:.1f} roku"
+        "Średni\nfollow-up",
+        f"{mean_followup:.1f}".replace(".", ",") + " roku"
     )
+
 # =====================================
 # Aktualny status pacjentów
 # =====================================
