@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.express as px
 import subprocess
 import sys
+import unicodedata
+import re
 
 # =====================================
 # KONFIGURACJA
@@ -75,7 +77,9 @@ def load_data():
 
 patients_df, pet_df = load_data()
 
-import unicodedata
+# =====================================
+# NORMALIZACJA NAZW PACJENTÓW
+# =====================================
 
 def normalize_patient_name(name):
 
@@ -131,12 +135,12 @@ pet_df["Data badania"] = pd.to_datetime(
 
 diagnosis_map = {
     "HL": "Chłoniak Hodgkina",
-    "DLBCL": "DLBCL",
+    "DLBCL": "Rozlany chłoniak z dużych komórek B",
     "FL": "Chłoniak grudkowy",
     "MCL": "Chłoniak z komórek płaszcza",
     "PMBCL": "Pierwotny chłoniak śródpiersia",
     "PTCL": "Obwodowy chłoniak T-komórkowy",
-    "OTHER_B_CELL": "Inny chłoniak B-komórkowy"
+    "B_CELL_NOS": "Inny chłoniak B-komórkowy"
 }
 
 # =====================================
@@ -169,11 +173,7 @@ mezczyzni = len(
         patients_df["płeć"].str.lower() == "mężczyzna"
     ]
 )
-naj_rozpoznanie = (
-    pet_df["Rozpoznanie"]
-    .value_counts()
-    .idxmax()
-)
+
 
 last_pet = (
     pet_df
@@ -249,7 +249,7 @@ with col5:
 with col6:
     st.metric(
         "Follow-up",
-        f"{mean_followup} lat"
+        f"{mean_followup:.1f} roku"
     )
 # =====================================
 # Aktualny status pacjentów
@@ -276,8 +276,10 @@ cr = response_counts.get("CR", 0)
 pr = response_counts.get("PR", 0)
 sd = response_counts.get("SD", 0)
 pd_resp = response_counts.get("PD", 0)
+uncertain = response_counts.get("UNCERTAIN", 0)
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
+
 
 with col1:
     st.metric(
@@ -301,9 +303,11 @@ with col4:
         "PD",
         f"{pd_resp}%"
     )
-
-
-
+with col5:
+    st.metric(
+        "UNCERTAIN",
+        f"{uncertain}%"
+    )
 
 
 # =====================================
@@ -312,9 +316,9 @@ with col4:
 
 st.divider()
 
-left, right = st.columns(2)
+col1, col2 = st.columns(2)
 
-with left:
+with col1:
 
     st.subheader("Rozpoznania")
 
@@ -330,7 +334,7 @@ with left:
     ]
 
     diag["Rozpoznanie"] = diag["Rozpoznanie"].replace({
-        "OTHER_B_CELL": "B-CELL NOS"
+        "B_CELL_NOS": "B-CELL NOS"
     })
 
     fig_diag = px.bar(
@@ -361,7 +365,7 @@ with left:
         width="stretch"
     )
 
-with right:
+with col2:
 
     st.subheader("Aktualny status pacjentów")
 
@@ -485,20 +489,13 @@ st.divider()
 
 st.markdown("# 👤 Pacjent")
 
+col, = st.columns(1)
 
-col1, col2 = st.columns([4, 1])
-
-with col1:
+with col:
     pacjent = st.selectbox(
         "Pacjent",
         pacjenci,
         label_visibility="collapsed"
-    )
-
-with col2:
-    st.metric(
-        "Pacjenci",
-        len(pacjenci)
     )
 
 # =====================================
@@ -571,11 +568,6 @@ if not patient_info.empty and not patient_pet.empty:
             icd10
         )
 
-
-
-#
-
-
     # =====================================
     # ROZPOZNANIE I LECZENIE
     # =====================================
@@ -596,7 +588,7 @@ if not patient_info.empty and not patient_pet.empty:
         "MCL": "#9B59B6",
         "PMBCL": "#F39C12",
         "PTCL": "#E91E63",
-        "OTHER_B_CELL": "#95A5A6"
+        'B_CELL_NOS': "#95A5A6"
     }
 
     diag_color = diagnosis_colors.get(
@@ -639,13 +631,13 @@ if not patient_info.empty and not patient_pet.empty:
             f"""
     <div style="
     background-color:#16324F;
-    padding:15px;
+    padding:12px;
     border-radius:10px;
     border-left:5px solid {diag_color};
     margin-bottom:10px;
     color:white;
     ">
-    <b>Rozpoznanie</b><br><br>
+    <b>Rozpoznanie</b><br>
     {diagnosis_name}
     </div>
     """,
@@ -658,13 +650,13 @@ if not patient_info.empty and not patient_pet.empty:
             f"""
     <div style="
     background-color:#16324F;
-    padding:15px;
+    padding:12px;
     border-radius:10px;
     border-left:5px solid {leczenie_color};
     margin-bottom:10px;
     color:white;
     ">
-    <b>Leczenie</b><br><br>
+    <b>Leczenie</b><br>
     {leczenie}
     </div>
     """,
@@ -723,7 +715,7 @@ if not patient_info.empty and not patient_pet.empty:
         if liczba_lat < 1:
             followup = f"{liczba_dni} dni"
         else:
-            followup = f"{liczba_lat} roku"
+            followup = f"{liczba_lat:.1f}".replace(".", ",") + " roku"
 
         st.metric(
             "Follow-up",
@@ -755,14 +747,14 @@ if not patient_info.empty and not patient_pet.empty:
         f"""
         <div style="
             background-color:#16324F;
-            padding:15px;
+            padding:12px;
             border-radius:10px;
             border-left:5px solid {status_colors.get(status, '#6c757d')};
             margin-bottom:10px;">
             <div style="font-size:14px;color:#B8D4F0;">
                 Aktualny status
             </div>
-            <div style="font-size:20px;font-weight:bold;">
+            <div style="font-size:24px;font-weight:bold;">
                 {status}
             </div>
             <div style="font-size:14px;">
@@ -807,13 +799,6 @@ stage_map = {
 st.subheader("Historia badań PET/CT")
 
 historia_df = patient_pet.copy()
-
-# pełne nazwy odpowiedzi
-historia_df["Odpowiedź pełna"] = (
-    historia_df["Odpowiedź"]
-    .map(response_map)
-    .fillna(historia_df["Odpowiedź"])
-)
 
 # skrócone odpowiedzi z ikonami
 historia_df["Odpowiedź na leczenie"] = (
@@ -904,9 +889,11 @@ with st.expander("📖 Interpretacja skali Deauville i Lugano"):
             hide_index=True,
             width="stretch"
         )
+
 # =====================================
-# RAPORT KLINICZNY
+# SKRACANIE OPISÓW KLINICZNYCH
 # =====================================
+
 def short_text(text, max_sentences=4):
 
 
@@ -917,7 +904,6 @@ def short_text(text, max_sentences=4):
     if text.lower() in ["nan", ""]:
         return "-"
 
-    import re
     zdania = re.split(r'(?<=[.!?])\s+', text)
 
     # frazy klinicznie istotne
@@ -980,7 +966,7 @@ st.subheader("Raport kliniczny")
 for _, row in patient_pet.iterrows():
 
     with st.expander(
-            f"PET {row['Nr PET']} | {row['Data badania'].strftime('%d.%m.%Y')}"
+            f"PET {row['Nr PET']} | {row['Data badania'].strftime('%d.%m.%Y')} | {row['Odpowiedź']}"
     ):
 
         odpowiedz = response_map.get(

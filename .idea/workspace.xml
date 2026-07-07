@@ -4,8 +4,59 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Naprawa klasyfikacji leczenia">
-      <change beforePath="$PROJECT_DIR$/classifier_details.py" beforeDir="false" afterPath="$PROJECT_DIR$/classifier_details.py" afterDir="false" />
+    <list default="true" id="bf81c208-88b6-420d-88dd-ba81a2dd43fe" name="Changes" comment="Naprawa classifier_details">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM HAZIK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ADAM WOSIK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/AGNIESZKA STANKIEWICZ.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ANDRZEJ PIETRAS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANDRZEJ PIETRAS.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ANNA BĄK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANNA BĄK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ANNA PALUCH.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANNA PALUCH.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ANNA TOKARCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANNA TOKARCZYK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ANTONI KASPRZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANTONI KASPRZYK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ANTONI SAJDAK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ANTONI SAJDAK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/BARBARA KWARCINSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/BARBARA KWARCINSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/BOLESŁAW KOWALCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/BOLESŁAW KOWALCZYK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/DOROTA PIETRAS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/DOROTA PIETRAS.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/DOROTA WRÓBEL.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/DOROTA WRÓBEL.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/EDWARD DRAPAŁA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EDWARD DRAPAŁA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ELŻBIETA GALAS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ELŻBIETA GALAS.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ELŻBIETA ŚCIOBŁOWSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ELŻBIETA ŚCIOBŁOWSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/EUGENIUSZ RACHWAŁ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EUGENIUSZ RACHWAŁ.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/EWA PAŃSZCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EWA PAŃSZCZYK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/EWELINA STRZYŻ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/EWELINA STRZYŻ.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/GRZEGORZ JARECKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/GRZEGORZ JARECKI.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/GRZEGORZ KOSOWSKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/GRZEGORZ KOSOWSKI.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/HALINA JASIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/HALINA JASIK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/HALINA LEWIŃSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/HALINA LEWIŃSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/IZABELA KATYŃSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/IZABELA KATYŃSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/JAN TRACZ.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JAN TRACZ.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/JANUSZ FRONT.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JANUSZ FRONT.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/JOANNA KLĘP.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JOANNA KLĘP.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/JUSTYNA GARA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JUSTYNA GARA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/JÓZEF OKŁA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/JÓZEF OKŁA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/KAROLINA RADWAŃSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KAROLINA RADWAŃSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/KATARZYNA BARCZYK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KATARZYNA BARCZYK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/KRZYSZTOF JERZYKOWSKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KRZYSZTOF JERZYKOWSKI.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/KRZYSZTOF OSAK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/KRZYSZTOF OSAK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/LUDWIK KOZINA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/LUDWIK KOZINA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MAREK RZEPKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MAREK RZEPKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MARTA FISZBAIN.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MARTA FISZBAIN.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MARZENA SOBOLEWSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MARZENA SOBOLEWSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MATEUSZ JANIK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATEUSZ JANIK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MATEUSZ KRÓL.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATEUSZ KRÓL.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MATYLDA FIREK.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATYLDA FIREK.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MATYLDA MOROWIEC.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MATYLDA MOROWIEC.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MAŁGORZATA STACHERA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MAŁGORZATA STACHERA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/MICHAŁ TRZÓSŁO.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/MICHAŁ TRZÓSŁO.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/OLEKSANDR ZAKREVSKYI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/OLEKSANDR ZAKREVSKYI.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/RENATA PIROWSKA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/RENATA PIROWSKA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ROBERT CHOJNOWSKI.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ROBERT CHOJNOWSKI.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/ROMAN SŁOTA.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/ROMAN SŁOTA.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/RYSZARD PASZKO.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/RYSZARD PASZKO.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/SYLWESTER JASNOS.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SYLWESTER JASNOS.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pacjenci/SYLWIA GMER.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/pacjenci/SYLWIA GMER.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,14 +138,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1780830266906</updated>
-    </task>
-    <task id="LOCAL-00002" summary="podstawy projektu">
-      <option name="closed" value="true" />
-      <created>1780832055336</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1780832055337</updated>
     </task>
     <task id="LOCAL-00003" summary="wczytywanie danych">
       <option name="closed" value="true" />
@@ -480,11 +523,18 @@
       <option name="project" value="LOCAL" />
       <updated>1783363116342</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Naprawa classifier_details">
+      <option name="closed" value="true" />
+      <created>1783363689017</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1783363689019</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="utworzenie pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
     <MESSAGE value="upoprawa pliku classifer treatment zeby miec informacje o rodzaju leczenia zastosowanego u pacjenta" />
     <MESSAGE value="poprawainformacji o pacjencie bardziej szczegolowe raporty pet" />
     <MESSAGE value="dodane skrocona czesci opisu do raportu klinicznego" />
@@ -509,6 +559,7 @@
     <MESSAGE value="Poprawa czytelności classifier_diagnosis" />
     <MESSAGE value="Poprawa czytelności classifier_skala" />
     <MESSAGE value="Naprawa klasyfikacji leczenia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Naprawa klasyfikacji leczenia" />
+    <MESSAGE value="Naprawa classifier_details" />
+    <option name="LAST_COMMIT_MESSAGE" value="Naprawa classifier_details" />
   </component>
 </project>
